@@ -25,3 +25,26 @@ export const newRoom = async (req: NextRequest) => {
     room,
   });
 };
+
+export const getRoomDetails = async (
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) => {
+  const room = await Room.findById(params.id);
+
+  if (!room) {
+    return NextResponse.json(
+      {
+        message: 'Room not found',
+      },
+      {
+        status: 404,
+      }
+    );
+  }
+
+  return NextResponse.json({
+    success: true,
+    room,
+  });
+};
