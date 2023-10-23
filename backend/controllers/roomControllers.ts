@@ -4,7 +4,7 @@ import Room from '../models/room';
 // GET all rooms => /api/rooms
 export const allRooms = async (req: NextRequest) => {
   // pagination displaying
-  const resPerPage: number = 8;
+  const resPerPage: number = 2;
 
   // GET request
   const rooms = await Room.find();
@@ -16,7 +16,7 @@ export const allRooms = async (req: NextRequest) => {
   });
 };
 
-// CREATE new room => /api/rooms
+// CREATE new room => /api/admin/rooms
 export const newRoom = async (req: NextRequest) => {
   const body = await req.json();
   // POST request
@@ -52,7 +52,7 @@ export const getRoomDetails = async (
   });
 };
 
-// UPDATE room details => /api/rooms/:id
+// UPDATE room details => /api/admin/rooms/:id
 export const updateRoom = async (
   req: NextRequest,
   { params }: { params: { id: string } }
@@ -79,5 +79,32 @@ export const updateRoom = async (
   return NextResponse.json({
     success: true,
     room,
+  });
+};
+
+// DELETE room => /api/admin/rooms/:id
+export const deleteRoom = async (
+  req: NextRequest,
+  { params }: { params: { id: any } }
+) => {
+  const room = await Room.findById(params.id);
+
+  if (!room) {
+    return NextResponse.json(
+      {
+        message: 'Room not found',
+      },
+      {
+        status: 404,
+      }
+    );
+  }
+
+  // TODO: delete images associated with the room
+
+  await room.deleteOne();
+
+  return NextResponse.json({
+    success: true,
   });
 };
