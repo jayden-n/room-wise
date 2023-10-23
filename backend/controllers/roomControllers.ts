@@ -36,14 +36,7 @@ export const getRoomDetails = catchAsyncErrors(
     const room = await Room.findById(params.id);
 
     if (!room) {
-      return NextResponse.json(
-        {
-          message: 'Room not found',
-        },
-        {
-          status: 404,
-        }
-      );
+      throw new ErrorHandler('Room not found', 404);
     }
 
     return NextResponse.json({
@@ -60,14 +53,7 @@ export const updateRoom = catchAsyncErrors(
     const body = await req.json();
 
     if (!room) {
-      return NextResponse.json(
-        {
-          message: 'Room not found',
-        },
-        {
-          status: 404,
-        }
-      );
+      throw new ErrorHandler('Room not found', 404);
     }
 
     room = await Room.findByIdAndUpdate(params.id, body, {
@@ -88,14 +74,7 @@ export const deleteRoom = catchAsyncErrors(
     const room = await Room.findById(params.id);
 
     if (!room) {
-      return NextResponse.json(
-        {
-          message: 'Room not found',
-        },
-        {
-          status: 404,
-        }
-      );
+      throw new ErrorHandler('Room not found', 404);
     }
 
     // TODO: delete images associated with the room
