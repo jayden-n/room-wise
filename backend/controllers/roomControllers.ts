@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Room from '../models/room';
+import ErrorHandler from '../utils/errorHandler';
 
 // GET all rooms => /api/rooms
 export const allRooms = async (req: NextRequest) => {
@@ -33,23 +34,39 @@ export const getRoomDetails = async (
   req: NextRequest,
   { params }: { params: { id: string } }
 ) => {
-  const room = await Room.findById(params.id);
+  try {
+    const room = await Room.findById(params.id);
 
-  if (!room) {
+    throw new ErrorHandler('test', 400);
+
+    // === normal try-catch block is not an ideal approach ===
+
+    // if (!room) {
+    //   return NextResponse.json(
+    //     {
+    //       message: 'Room not found',
+    //     },
+    //     {
+    //       status: 404,
+    //     }
+    //   );
+    // }
+
+    return NextResponse.json({
+      success: true,
+      room,
+    });
+  } catch (error: any) {
+    // console.log(error.statusCode);
     return NextResponse.json(
       {
-        message: 'Room not found',
+        message: error.message,
       },
       {
-        status: 404,
+        status: error.statusCode,
       }
     );
   }
-
-  return NextResponse.json({
-    success: true,
-    room,
-  });
 };
 
 // UPDATE room details => /api/admin/rooms/:id
