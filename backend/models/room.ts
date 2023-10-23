@@ -61,7 +61,7 @@ const roomSchema: Schema = new Schema({
 
   description: {
     type: String,
-    required: [true, 'Please enter a room name'],
+    required: [true, 'Please enter a room description'],
   },
 
   pricePerNight: {
