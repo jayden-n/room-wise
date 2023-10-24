@@ -7,10 +7,7 @@ import APIFilters from '../utils/apiFilters';
 // GET all rooms => /api/rooms
 export const allRooms = catchAsyncErrors(async (req: NextRequest) => {
   // pagination displaying
-  const resPerPage: number = 2;
-
-  // GET request
-  // const rooms = await Room.find();
+  const resPerPage: number = 4;
 
   const { searchParams } = new URL(req.url);
   // console.log(searchParams);
@@ -21,15 +18,30 @@ export const allRooms = catchAsyncErrors(async (req: NextRequest) => {
   searchParams.forEach((value, key) => {
     queryStr[key] = value;
   });
-
   // console.log(queryStr);
+
+  // counting the total number of documents in the "Room" collection in the database.
+  // for Front-End pagination usage
+  const roomsCount: number = await Room.countDocuments();
 
   const apiFilters = new APIFilters(Room, queryStr).search().filter();
 
-  const rooms: IRoom[] = await apiFilters.query;
+  let rooms: IRoom[] = await apiFilters.query;
+  const filteredRoomCount: number = rooms.length;
+
+  // After search || filter methods, pagination will come to place
+  apiFilters.pagination(resPerPage);
+
+  // ERROR: Mongoose no longer allows executing the same query object twice.
+  // If you do, you'll get a Query was already executed error. Executing the same query instance twice is typically indicative of mixing callbacks and promises
+
+  // SOLUTION: use .clone() to fix: Query was already executed: Room.find({})
+  rooms = await apiFilters.query.clone();
 
   return NextResponse.json({
     success: true,
+    filteredRoomCount,
+    roomsCount,
     resPerPage,
     rooms,
   });
