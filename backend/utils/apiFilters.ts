@@ -7,6 +7,7 @@ class APIFilters {
     this.queryStr = queryStr;
   }
 
+  // searching room address
   search(): APIFilters {
     const location = this.queryStr?.location
       ? {
@@ -29,6 +30,8 @@ class APIFilters {
     // ----just a copy ----
     const queryCopy = { ...this.queryStr };
 
+    // add: "page" to removeFields
+    // to ensure that it doesn't affect the filtering process and is only used for pagination, as intended.
     const removeFields = ['location', 'page'];
     removeFields.forEach((el) => delete queryCopy[el]);
 
