@@ -1,7 +1,15 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect } from 'react';
 import RoomItem from './room/RoomItem';
+import toast from 'react-hot-toast';
 
 const Home = () => {
+  useEffect(() => {
+    toast.success('success');
+    toast.error('error');
+  }, []);
+
   return (
     <div>
       <section id='rooms' className='container mt-5'>
