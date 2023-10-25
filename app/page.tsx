@@ -1,7 +1,11 @@
-export default function Home() {
+'use client';
+
+import Home from '@/components/Home';
+
+export default function HomePage() {
   return (
-    <div className='container'>
-      <h1>Homepage</h1>
-    </div>
+    <>
+      <Home />
+    </>
   );
 }
