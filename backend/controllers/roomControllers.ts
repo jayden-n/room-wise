@@ -7,12 +7,11 @@ import APIFilters from '../utils/apiFilters';
 // GET all rooms => /api/rooms
 export const allRooms = catchAsyncErrors(async (req: NextRequest) => {
   // pagination displaying
-  const resPerPage: number = 4;
+  const resPerPage: number = 8;
 
   const { searchParams } = new URL(req.url);
   // console.log(searchParams);
 
-  throw new ErrorHandler('hello', 400);
   const queryStr: any = {};
 
   // forEach loop will get ALL matched values on searchParams
@@ -20,10 +19,6 @@ export const allRooms = catchAsyncErrors(async (req: NextRequest) => {
     queryStr[key] = value;
   });
   // console.log(queryStr);
-
-  // counting the total number of documents in the "Room" collection in the database.
-  // for Front-End pagination usage
-  const roomsCount: number = await Room.countDocuments();
 
   const apiFilters = new APIFilters(Room, queryStr).search().filter();
 
@@ -42,7 +37,6 @@ export const allRooms = catchAsyncErrors(async (req: NextRequest) => {
   return NextResponse.json({
     success: true,
     filteredRoomCount,
-    roomsCount,
     resPerPage,
     rooms,
   });
