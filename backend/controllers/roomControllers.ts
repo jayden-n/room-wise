@@ -12,6 +12,7 @@ export const allRooms = catchAsyncErrors(async (req: NextRequest) => {
   const { searchParams } = new URL(req.url);
   // console.log(searchParams);
 
+  throw new ErrorHandler('hello', 400);
   const queryStr: any = {};
 
   // forEach loop will get ALL matched values on searchParams
