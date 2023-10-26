@@ -6,6 +6,9 @@ const nextConfig = {
     // MUST add later for deployment
     DB_URI: '',
   },
+  images: {
+    domains: ['res.cloudinary.com'],
+  },
 };
 
 module.exports = nextConfig;
