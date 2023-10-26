@@ -1,7 +1,6 @@
-'use client';
-
 import { IRoom } from '@/backend/models/room';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import StarRatings from 'react-star-ratings';
 
@@ -26,28 +25,33 @@ const RoomItem = ({ room }: IProps) => {
         />
         <div className='card-body d-flex flex-column'>
           <h5 className='card-title'>
-            <a href='/rooms/roomId'>Room Name</a>
+            <Link href={`/rooms/${room._id}`}>{room?.name}</Link>
           </h5>
           <div className='mt-auto'>
-            <p className='card-text mt-2'>
-              <b>$100</b> / night
-            </p>
+            <div className='card-text mt-2'>
+              <b>${room?.pricePerNight}</b> / night
+            </div>
           </div>
           <div>
             <div className='d-flex'>
               <StarRatings
-                rating={5}
+                rating={room?.ratings}
                 starRatedColor='#e61e4d'
                 numberOfStars={5}
                 starDimension='18px'
                 starSpacing='1px'
                 name='rating'
               />
-              <span className='no-of-reviews'>(50 Reviews)</span>
+              <span className='no-of-reviews'>
+                ({room?.numOfReviews} reviews)
+              </span>
             </div>
-            <a className='btn view-btn mt-3 w-100' href='/rooms/roomId'>
+            <Link
+              className='btn view-btn mt-3 w-100'
+              href={`/rooms/${room?._id}`}
+            >
               View Details
-            </a>
+            </Link>
           </div>
         </div>
       </div>

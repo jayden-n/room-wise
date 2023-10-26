@@ -13,12 +13,8 @@ interface IProps {
 }
 
 const Home = ({ data }: IProps) => {
+  // pull them out from "data"
   const { rooms, resPerPage, filteredRoomCount } = data;
-
-  useEffect(() => {
-    toast.success('success');
-    toast.error('error');
-  }, []);
 
   return (
     <div>
