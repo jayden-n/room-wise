@@ -16,6 +16,7 @@
     "next-connect": "^1.0.0",
     "next-seo": "^6.1.0",
     "react": "^18",
+    "react-bootstrap": "^2.9.1",
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
     "react-star-ratings": "^2.3.0"
