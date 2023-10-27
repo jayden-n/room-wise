@@ -5,7 +5,7 @@ const NewReview = () => {
     <>
       <button
         type='button'
-        className='btn form-btn mt-4 mb-5'
+        className='btn btn-danger form-btn mt-4 mb-5 '
         data-bs-toggle='modal'
         data-bs-target='#ratingModal'
       >
