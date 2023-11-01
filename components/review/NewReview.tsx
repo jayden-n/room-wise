@@ -40,7 +40,7 @@ const NewReview = () => {
                 ex, nec bibendum libero elit at orci.
               </p>
             </div>
-            <div className='modal-footer'>
+            <div className='modal-footer '>
               <button
                 type='button'
                 className='btn my-3 form-btn w-100'

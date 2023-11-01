@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import RoomItem from './room/RoomItem';
 import toast from 'react-hot-toast';
 import { IRoom } from '@/backend/models/room';
+import CustomPagination from './layout/CustomPagination';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 interface IProps {
   data: {
@@ -13,16 +16,24 @@ interface IProps {
 }
 
 const Home = ({ data }: IProps) => {
+  const searchParams = useSearchParams();
+  const location = searchParams.get('location');
+
   // pull them out from "data"
   const { rooms, resPerPage, filteredRoomCount } = data;
 
   return (
     <div>
       <section id='rooms' className='container mt-5'>
-        <h2 className='mb-3 ml-2 stays-heading'>All Rooms</h2>
-        <a href='/search' className='ml-2 back-to-search'>
-          <i className='fa fa-arrow-left'></i> Back to Search
-        </a>
+        <h2 className='mb-3 ml-2 stays-heading'>
+          {location
+            ? // or filteredRoomCount
+              `${rooms?.length} rooms found in "${location}"`
+            : 'All rooms'}
+        </h2>
+        <Link href='/search' className='ml-2 back-to-search'>
+          <i className='fa fa-arrow-left me-1'></i> Back to Search
+        </Link>
 
         <div className='row mt-4'>
           {rooms?.length === 0 ? (
@@ -34,6 +45,10 @@ const Home = ({ data }: IProps) => {
           )}
         </div>
       </section>
+      <CustomPagination
+        resPerPage={resPerPage}
+        filteredRoomCount={filteredRoomCount}
+      />
     </div>
   );
 };

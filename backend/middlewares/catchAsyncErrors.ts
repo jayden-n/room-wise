@@ -21,7 +21,7 @@ export const catchAsyncErrors =
       // users will receive back values from Error object -> easy-to-understand
       if (error?.name === 'ValidationError') {
         error.message = Object.values<IValidationError>(error.errors).map(
-          (val) => val.message
+          (val) => val.message,
         );
         error.statusCode = 400;
       }
@@ -32,7 +32,7 @@ export const catchAsyncErrors =
         },
         {
           status: error.statusCode || 500,
-        }
+        },
       );
     }
   };
