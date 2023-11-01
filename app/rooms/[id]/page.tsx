@@ -19,7 +19,6 @@ const getRoom = async (id: string) => {
 
 export default async function RoomDetailsPage({ params }: IProps) {
   const data = await getRoom(params?.id);
-  console.log(data);
 
   // errMessage
   if (data?.message) {
