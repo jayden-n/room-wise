@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import RoomItem from './room/RoomItem';
 import toast from 'react-hot-toast';
 import { IRoom } from '@/backend/models/room';
+import CustomPagination from './layout/CustomPagination';
 
 interface IProps {
   data: {
@@ -34,6 +35,10 @@ const Home = ({ data }: IProps) => {
           )}
         </div>
       </section>
+      <CustomPagination
+        resPerPage={resPerPage}
+        filteredRoomCount={filteredRoomCount}
+      />
     </div>
   );
 };

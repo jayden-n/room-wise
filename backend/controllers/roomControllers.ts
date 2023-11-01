@@ -7,7 +7,7 @@ import APIFilters from '../utils/apiFilters';
 // GET all rooms => /api/rooms
 export const allRooms = catchAsyncErrors(async (req: NextRequest) => {
   // pagination displaying
-  const resPerPage: number = 8;
+  const resPerPage: number = 2;
 
   const { searchParams } = new URL(req.url);
   // console.log(searchParams);
@@ -67,7 +67,7 @@ export const getRoomDetails = catchAsyncErrors(
       success: true,
       room,
     });
-  }
+  },
 );
 
 // UPDATE room details => /api/admin/rooms/:id
@@ -89,7 +89,7 @@ export const updateRoom = catchAsyncErrors(
       success: true,
       room,
     });
-  }
+  },
 );
 
 // DELETE room => /api/admin/rooms/:id
@@ -108,5 +108,5 @@ export const deleteRoom = catchAsyncErrors(
     return NextResponse.json({
       success: true,
     });
-  }
+  },
 );
