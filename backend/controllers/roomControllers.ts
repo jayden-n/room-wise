@@ -18,8 +18,6 @@ export const allRooms = catchAsyncErrors(async (req: NextRequest) => {
 	searchParams.forEach((value, key) => {
 		queryStr[key] = value;
 	});
-	// console.log(queryStr);
-
 	const apiFilters = new APIFilters(Room, queryStr).search().filter();
 
 	let rooms: IRoom[] = await apiFilters.query;
