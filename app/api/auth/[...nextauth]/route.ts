@@ -56,6 +56,10 @@ async function auth(req: NextApiRequest, res: NextApiResponse) {
 			session: async ({ session, token }) => {
 				session.user = token.user as IUser;
 
+				// removing password from your 'session' response
+				// @ts-ignore
+				delete session?.user?.password;
+
 				return session;
 			},
 		},

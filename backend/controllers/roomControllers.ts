@@ -7,7 +7,7 @@ import ErrorHandler from '../utils/errorHandler';
 // GET all rooms => /api/rooms
 export const allRooms = catchAsyncErrors(async (req: NextRequest) => {
 	// pagination displaying
-	const resPerPage: number = 2;
+	const resPerPage: number = 4;
 
 	const { searchParams } = new URL(req.url);
 	// console.log(searchParams);
