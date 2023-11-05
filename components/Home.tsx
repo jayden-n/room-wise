@@ -30,7 +30,7 @@ const Home = ({ data }: IProps) => {
 						: 'All rooms'}
 				</h2>
 				<Link href='/search' className='ml-2 back-to-search'>
-					<i className='fa fa-arrow-left me-1'></i> Back to Search
+					<i className='fa fa-arrow-left me-1'></i> Search for room location
 				</Link>
 
 				<div className='row mt-4'>

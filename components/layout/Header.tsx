@@ -1,12 +1,15 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 
 const Header = () => {
 	const { data } = useSession();
-	console.log(data);
+	// console.log(data);
 
+	const logoutHandler = () => {
+		signOut();
+	};
 	return (
 		<nav className='navbar sticky-top py-2'>
 			<div className='container'>
@@ -57,29 +60,44 @@ const Header = () => {
 								className='dropdown-menu w-100'
 								aria-labelledby='dropdownMenuButton1'
 							>
-								<a href='/admin/dashboard' className='dropdown-item'>
+								<Link href='/admin/dashboard' className='dropdown-item'>
 									Dashboard
-								</a>
-								<a href='/bookings/me' className='dropdown-item'>
+								</Link>
+								<Link href='/bookings/me' className='dropdown-item'>
 									My Bookings
-								</a>
-								<a href='/me/update' className='dropdown-item'>
+								</Link>
+								<Link href='/me/update' className='dropdown-item'>
 									Profile
-								</a>
-								<a href='/' className='dropdown-item text-danger'>
+								</Link>
+								<Link
+									href='/'
+									className='dropdown-item text-danger'
+									onClick={logoutHandler}
+								>
 									Logout
-								</a>
+								</Link>
 							</div>
 						</div>
 					) : (
-						data === null && (
-							<Link
-								href='/login'
-								className='btn btn-danger px-4 text-white login-header-btn float-right'
-							>
-								Login
-							</Link>
-						)
+						<>
+							{/* session callback will be 'undefined' first, to optimize that you have to use a skeleton */}
+							{data === undefined && (
+								<div className='placeholder-glow'>
+									<figure className='avatar avatar-nv placeholder bg-secondary'></figure>
+									<span className='placeholder w-25  bg-secondary ms-2'></span>
+								</div>
+							)}
+
+							{/* after that, login information will be displayed */}
+							{data === null && (
+								<Link
+									href='/login'
+									className='btn btn-danger px-4 text-white login-header-btn float-right'
+								>
+									Login
+								</Link>
+							)}
+						</>
 					)}
 				</div>
 			</div>
