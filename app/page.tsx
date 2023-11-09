@@ -1,6 +1,6 @@
-'use client';
-import Home from '@/components/Home';
-import Error from './error';
+"use client";
+import Home from "@/components/Home";
+import Error from "./error";
 
 const getRooms = async (searchParams: string) => {
 	const urlParams = new URLSearchParams(searchParams);
@@ -8,7 +8,7 @@ const getRooms = async (searchParams: string) => {
 
 	const res = await fetch(`${process.env.API_URL}/api/rooms?${queryString}`, {
 		// always return fresh data
-		cache: 'no-cache',
+		cache: "no-cache",
 	});
 	return res.json();
 };

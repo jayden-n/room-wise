@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useRouter, useSearchParams } from 'next/navigation';
-import Pagination from 'react-js-pagination';
+import { useRouter, useSearchParams } from "next/navigation";
+import Pagination from "react-js-pagination";
 
 interface IProps {
 	resPerPage: number;
@@ -12,18 +12,18 @@ const CustomPagination = ({ resPerPage, filteredRoomCount }: IProps) => {
 	const router = useRouter();
 
 	const searchParams = useSearchParams();
-	let page = searchParams.get('page') || 1;
+	let page = searchParams.get("page") || 1;
 	page = Number(page);
 
 	let queryParams;
 	const handlePageChange = (currentPage: string) => {
-		if (typeof window !== 'undefined') {
+		if (typeof window !== "undefined") {
 			queryParams = new URLSearchParams(window.location.search);
 
-			if (queryParams.has('page')) {
-				queryParams.set('page', currentPage);
+			if (queryParams.has("page")) {
+				queryParams.set("page", currentPage);
 			} else {
-				queryParams.append('page', currentPage);
+				queryParams.append("page", currentPage);
 			}
 
 			const path = `${window.location.pathname}?${queryParams.toString()}`;
@@ -40,10 +40,10 @@ const CustomPagination = ({ resPerPage, filteredRoomCount }: IProps) => {
 						itemsCountPerPage={resPerPage}
 						totalItemsCount={filteredRoomCount}
 						onChange={handlePageChange}
-						nextPageText={'Next'}
-						prevPageText={'Prev'}
-						firstPageText={'First'}
-						lastPageText={'Last'}
+						nextPageText={"Next"}
+						prevPageText={"Prev"}
+						firstPageText={"First"}
+						lastPageText={"Last"}
 						itemClass='page-item'
 						linkClass='page-link'
 					/>
