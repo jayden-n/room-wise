@@ -1,6 +1,6 @@
-'use client';
-import Error from '@/app/error';
-import RoomDetails from '@/components/room/RoomDetails';
+"use client";
+import Error from "@/app/error";
+import RoomDetails from "@/components/room/RoomDetails";
 
 interface IProps {
 	params: {
@@ -11,7 +11,7 @@ interface IProps {
 const getRoom = async (id: string) => {
 	const res = await fetch(`${process.env.API_URL}/api/rooms/${id}`, {
 		// always return fresh data
-		cache: 'no-cache',
+		cache: "no-cache",
 	});
 	return res.json();
 };

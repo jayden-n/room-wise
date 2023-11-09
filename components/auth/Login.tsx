@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { signIn } from 'next-auth/react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
-import ButtonLoader from '../layout/ButtonLoader';
+import { signIn } from "next-auth/react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import ButtonLoader from "../layout/ButtonLoader";
 
 const Login = () => {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 	const [loading, setLoading] = useState(false);
 
 	const router = useRouter();
@@ -18,7 +18,7 @@ const Login = () => {
 		e.preventDefault();
 		setLoading(true);
 
-		const result = await signIn('credentials', {
+		const result = await signIn("credentials", {
 			redirect: false,
 			email,
 			password,
@@ -28,7 +28,7 @@ const Login = () => {
 		if (result?.error) {
 			toast.error(result.error);
 		} else {
-			router.replace('/');
+			router.replace("/");
 		}
 	};
 
@@ -39,8 +39,8 @@ const Login = () => {
 					<h1 className='mb-3'>Login</h1>
 					<div className='mb-3'>
 						<label className='form-label' htmlFor='email_field'>
-							{' '}
-							Email{' '}
+							{" "}
+							Email{" "}
 						</label>
 						<input
 							type='email'
@@ -53,8 +53,8 @@ const Login = () => {
 
 					<div className='mb-3'>
 						<label className='form-label' htmlFor='password_field'>
-							{' '}
-							Password{' '}
+							{" "}
+							Password{" "}
 						</label>
 						<input
 							type='password'
@@ -75,13 +75,13 @@ const Login = () => {
 						className='btn btn-danger  form-btn w-100 py-2'
 						disabled={loading}
 					>
-						{loading ? <ButtonLoader /> : 'LOGIN'}
+						{loading ? <ButtonLoader /> : "LOGIN"}
 					</button>
 
 					<div className='mt-3 mb-4'>
 						<Link href='/register' className='float-end'>
-							{' '}
-							New User? Register Here{' '}
+							{" "}
+							New User? Register Here{" "}
 						</Link>
 					</div>
 				</form>
