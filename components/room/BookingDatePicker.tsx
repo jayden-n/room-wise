@@ -1,7 +1,5 @@
-import React from 'react';
-
 const BookingDatePicker = ({ room }) => {
-  return <div>BookingDatePicker</div>;
+	return <div>BookingDatePicker</div>;
 };
 
 export default BookingDatePicker;
