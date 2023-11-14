@@ -1,11 +1,11 @@
-'use client';
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+"use client";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 const Search = () => {
-	const [location, setLocation] = useState('');
-	const [guests, setGuests] = useState('');
-	const [category, setCategory] = useState('');
+	const [location, setLocation] = useState("");
+	const [guests, setGuests] = useState("");
+	const [category, setCategory] = useState("");
 
 	const router = useRouter();
 
@@ -21,7 +21,7 @@ const Search = () => {
 			// will remove any empty values, and join "&"
 		]
 			.filter(Boolean)
-			.join('&');
+			.join("&");
 
 		router.push(`/?${queryString}`);
 	};
@@ -33,8 +33,8 @@ const Search = () => {
 					<h2 className='mb-3'>Search Rooms</h2>
 					<div className='form-group mt-3'>
 						<label htmlFor='location_field' className='mb-1'>
-							{' '}
-							Location{' '}
+							{" "}
+							Location{" "}
 						</label>
 						<input
 							type='text'
@@ -48,8 +48,8 @@ const Search = () => {
 
 					<div className='form-group mt-3'>
 						<label htmlFor='guest_field' className='mb-1'>
-							{' '}
-							No. of Guests{' '}
+							{" "}
+							No. of Guests{" "}
 						</label>
 						<select
 							className='form-select'
@@ -67,8 +67,8 @@ const Search = () => {
 
 					<div className='form-group mt-3'>
 						<label htmlFor='room_type_field' className='mb-1'>
-							{' '}
-							Room Type{' '}
+							{" "}
+							Room Type{" "}
 						</label>
 						<select
 							className='form-select'
@@ -76,7 +76,7 @@ const Search = () => {
 							value={category}
 							onChange={(e) => setCategory(e.target.value)}
 						>
-							{['King', 'Single', 'Twins'].map((item) => (
+							{["King", "Single", "Twins"].map((item) => (
 								<option key={item} value={item}>
 									{item}
 								</option>

@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { catchAsyncErrors } from '../middlewares/catchAsyncErrors';
-import Room, { IRoom } from '../models/room';
-import APIFilters from '../utils/apiFilters';
-import ErrorHandler from '../utils/errorHandler';
+import { NextRequest, NextResponse } from "next/server";
+import { catchAsyncErrors } from "../middlewares/catchAsyncErrors";
+import Room, { IRoom } from "../models/room";
+import APIFilters from "../utils/apiFilters";
+import ErrorHandler from "../utils/errorHandler";
 
 // GET all rooms => /api/rooms
 export const allRooms = catchAsyncErrors(async (req: NextRequest) => {
@@ -58,7 +58,7 @@ export const getRoomDetails = catchAsyncErrors(
 		const room = await Room.findById(params.id);
 
 		if (!room) {
-			throw new ErrorHandler('Room not found', 404);
+			throw new ErrorHandler("Room not found", 404);
 		}
 
 		return NextResponse.json({
@@ -75,7 +75,7 @@ export const updateRoom = catchAsyncErrors(
 		const body = await req.json();
 
 		if (!room) {
-			throw new ErrorHandler('Room not found', 404);
+			throw new ErrorHandler("Room not found", 404);
 		}
 
 		room = await Room.findByIdAndUpdate(params.id, body, {
@@ -96,7 +96,7 @@ export const deleteRoom = catchAsyncErrors(
 		const room = await Room.findById(params.id);
 
 		if (!room) {
-			throw new ErrorHandler('Room not found', 404);
+			throw new ErrorHandler("Room not found", 404);
 		}
 
 		// TODO: delete images associated with the room
