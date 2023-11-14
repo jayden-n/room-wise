@@ -20,7 +20,7 @@ export default async function RoomDetailsPage({ params }: IProps) {
 	const data = await getRoom(params?.id);
 
 	// errMessage
-	if (data?.message) {
+	if (data?.errMessage) {
 		return <Error error={data} />;
 	}
 

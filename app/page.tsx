@@ -21,7 +21,7 @@ export default async function HomePage({
 	const data = await getRooms(searchParams);
 
 	// errMessage
-	if (data?.message) {
+	if (data?.errMessage) {
 		return <Error error={data} />;
 	}
 	return (
