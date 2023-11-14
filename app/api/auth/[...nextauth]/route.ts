@@ -72,6 +72,10 @@ async function auth(req: NextApiRequest, res: NextApiResponse) {
 				return session;
 			},
 		},
+		// redirect to login if user try to update profile when not signing in
+		pages: {
+			signIn: "/login",
+		},
 		secret: process.env.NEXTAUTH_SECRET,
 	});
 }
