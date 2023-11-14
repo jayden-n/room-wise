@@ -1,7 +1,11 @@
 "use client";
 
-import { useUpdateProfileMutation } from "@/redux/api/userApi";
-import { useAppSelector } from "@/redux/hooks";
+import {
+	useLazyUpdateSessionQuery,
+	useUpdateProfileMutation,
+} from "@/redux/api/userApi";
+import { setUser } from "@/redux/features/userSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -12,13 +16,22 @@ const UpdateProfile = () => {
 	const [email, setEmail] = useState("");
 
 	const router = useRouter();
+
+	const dispatch = useAppDispatch();
+
 	// pull out the current user preparing for updating
 	const { user: currentUser } = useAppSelector((state) => state.auth);
 
 	const [updateProfile, { isLoading, isSuccess, error }] =
 		useUpdateProfileMutation();
 
+	const [updateSession, { data }] = useLazyUpdateSessionQuery();
+
+	// pass updated user data to the slice
+	if (data) dispatch(setUser(data?.user));
+
 	useEffect(() => {
+		// if user exists
 		if (currentUser) {
 			setName(currentUser?.name);
 			setEmail(currentUser?.email);
@@ -29,6 +42,8 @@ const UpdateProfile = () => {
 		}
 
 		if (isSuccess) {
+			//@ts-ignore
+			updateSession();
 			router.refresh();
 		}
 	}, [currentUser, error, isSuccess]);

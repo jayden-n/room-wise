@@ -1,18 +1,22 @@
-import dbConnect from '@/backend/config/dbConnect';
-import User, { IUser } from '@/backend/models/user';
-import { NextApiRequest, NextApiResponse } from 'next';
-import NextAuth from 'next-auth/next';
-import CredentialsProvider from 'next-auth/providers/credentials';
+import dbConnect from "@/backend/config/dbConnect";
+import User, { IUser } from "@/backend/models/user";
+import { NextApiRequest, NextApiResponse } from "next";
+import NextAuth from "next-auth/next";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 type Credentials = {
 	email: string;
 	password: string;
 };
 
+type Token = {
+	user: IUser;
+};
+
 async function auth(req: NextApiRequest, res: NextApiResponse) {
 	return await NextAuth(req, res, {
 		session: {
-			strategy: 'jwt',
+			strategy: "jwt",
 		},
 		providers: [
 			CredentialsProvider({
@@ -22,20 +26,20 @@ async function auth(req: NextApiRequest, res: NextApiResponse) {
 
 					// pull out email & password from credentials
 					const { email, password } = credentials;
-					const user = await User.findOne({ email }).select('+password');
+					const user = await User.findOne({ email }).select("+password");
 
 					if (!user) {
-						throw new Error('Invalid email or password');
+						throw new Error("Invalid email or password");
 					}
 
-					var bcrypt = require('bcryptjs');
+					var bcrypt = require("bcryptjs");
 					const isPasswordMatched = await bcrypt.compare(
 						password,
 						user.password,
 					);
 
 					if (!isPasswordMatched) {
-						throw new Error('Invalid email or password');
+						throw new Error("Invalid email or password");
 					}
 
 					return user;
@@ -45,11 +49,16 @@ async function auth(req: NextApiRequest, res: NextApiResponse) {
 
 		callbacks: {
 			jwt: async ({ token, user }) => {
-				console.log(token, user);
+				const jwtToken = token as Token;
 
 				user && (token.user = user);
 
-				// TODO: update session when user is updated
+				// update session when user is updated
+				if (req.url?.includes("/api/auth/session?update")) {
+					// hit the db, and return the updated user
+					const updatedUser = await User.findById(jwtToken?.user?._id);
+					token.user = updatedUser;
+				}
 				return token;
 			},
 

@@ -19,7 +19,7 @@ export const registerUser = catchAsyncErrors(async (req: NextRequest) => {
 	});
 });
 
-// Update use profile  =>  /api/me/update
+// Update user profile  =>  /api/me/update
 export const updateProfile = catchAsyncErrors(async (req: NextRequest) => {
 	const body = await req.json();
 
