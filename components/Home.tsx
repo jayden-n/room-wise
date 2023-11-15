@@ -17,7 +17,7 @@ const Home = ({ data }: IProps) => {
 	const searchParams = useSearchParams();
 	const location = searchParams.get("location");
 
-	// pull them out from "data"
+	// pull out from "data"
 	const { rooms, resPerPage, filteredRoomCount } = data;
 
 	return (
