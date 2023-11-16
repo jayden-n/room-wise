@@ -4,6 +4,7 @@ export const userApi = createApi({
 	reducerPath: "userApi",
 	baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
 	endpoints: (builder) => ({
+		// useUpdateProfileMutation
 		updateProfile: builder.mutation({
 			query(body) {
 				return {
@@ -14,6 +15,7 @@ export const userApi = createApi({
 			},
 		}),
 
+		// useLazyUpdateSessionQuery
 		updateSession: builder.query({
 			query() {
 				return {
@@ -21,7 +23,33 @@ export const userApi = createApi({
 				};
 			},
 		}),
+		// useUpdatePasswordMutation
+		updatePassword: builder.mutation({
+			query(body) {
+				return {
+					url: "/me/update_password",
+					method: "PUT",
+					body,
+				};
+			},
+		}),
+
+		// useUploadAvatarMutation
+		uploadAvatar: builder.mutation({
+			query(body) {
+				return {
+					url: "/me/upload_avatar",
+					method: "PUT",
+					body,
+				};
+			},
+		}),
 	}),
 });
 
-export const { useUpdateProfileMutation, useLazyUpdateSessionQuery } = userApi;
+export const {
+	useUpdateProfileMutation,
+	useLazyUpdateSessionQuery,
+	useUpdatePasswordMutation,
+	useUploadAvatarMutation,
+} = userApi;

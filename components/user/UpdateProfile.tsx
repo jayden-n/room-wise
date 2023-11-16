@@ -52,7 +52,6 @@ const UpdateProfile = () => {
 		e.preventDefault();
 
 		const userData = { name, email };
-
 		updateProfile(userData);
 	};
 
