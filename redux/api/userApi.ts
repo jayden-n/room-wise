@@ -33,6 +33,17 @@ export const userApi = createApi({
 				};
 			},
 		}),
+
+		// useUploadAvatarMutation
+		uploadAvatar: builder.mutation({
+			query(body) {
+				return {
+					url: "/me/upload_avatar",
+					method: "PUT",
+					body,
+				};
+			},
+		}),
 	}),
 });
 
@@ -40,4 +51,5 @@ export const {
 	useUpdateProfileMutation,
 	useLazyUpdateSessionQuery,
 	useUpdatePasswordMutation,
+	useUploadAvatarMutation,
 } = userApi;
