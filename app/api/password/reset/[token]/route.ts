@@ -1,5 +1,5 @@
 import dbConnect from "@/backend/config/dbConnect";
-import { newRoom } from "@/backend/controllers/roomControllers";
+import { resetPassword } from "@/backend/controllers/authControllers";
 import { createEdgeRouter } from "next-connect";
 import { NextRequest } from "next/server";
 
@@ -9,8 +9,8 @@ const router = createEdgeRouter<NextRequest, RequestContext>();
 
 dbConnect();
 
-router.post(newRoom);
+router.put(resetPassword);
 
-export async function POST(request: NextRequest, ctx: RequestContext) {
+export async function PUT(request: NextRequest, ctx: RequestContext) {
 	return router.run(request, ctx);
 }
