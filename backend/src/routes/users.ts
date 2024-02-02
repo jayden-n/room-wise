@@ -8,6 +8,7 @@ const router = express.Router();
 // /api/users/register
 router.post(
 	'/register',
+	// NOTE: REFACTOR
 	// these checks will be attached to the Request, then forwards it to "validationResult(req)"
 	[
 		check('firstName', 'First Name is required').isString(),
@@ -35,7 +36,8 @@ router.post(
 			await user.save(); // save user to db
 
 			// ========= GENERATE JWT SECRET KEY =========
-			// WHY?: generates a JWT for the newly created user, sets the JWT as a cookie, and sends the cookie in the response
+			// WHY?: generates a JWT for the newly created user, sets the JWT as a cookie, and sends the cookie in the response. Allowing server to identify and authorize the user.
+
 			const token = jwt.sign(
 				{ userId: user.id },
 				process.env.JWT_SECRET_KEY as string,
