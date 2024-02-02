@@ -1,5 +1,5 @@
-import { jwt } from 'jsonwebtoken';
-import { bcrypt, compare } from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 import express, { Request, Response } from 'express';
 import { check, validationResult } from 'express-validator';
 import User from '../models/user';
@@ -60,8 +60,8 @@ router.post(
 				maxAge: 86400000,
 			});
 
-			// since cookie cannot sent
-			// => sends back userId for front-end to perform logged in operations
+			// since cookie cannot be sent
+			// => sends back userId for front-end to perform auth operations
 			res.status(200).json({ userId: user._id });
 		} catch (error) {
 			console.log(error);
@@ -69,3 +69,5 @@ router.post(
 		}
 	},
 );
+
+export default router;
