@@ -1,8 +1,15 @@
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Layout from "./layouts/Layout";
+
 function App() {
   return (
-    <>
-      <div className="text-red-600 bg-red-500 text-4xl font-medium">hello</div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout>Homepage</Layout>} />
+        <Route path="/search" element={<Layout>Search Page</Layout>} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
