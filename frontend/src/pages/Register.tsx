@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import * as apiClient from '../api-client';
 import { useMutation } from 'react-query';
 import { useAppContext } from '../contexts/AppContext';
+import { useNavigate } from 'react-router-dom';
 
 export type RegisterFormData = {
 	email: string;
@@ -12,6 +13,7 @@ export type RegisterFormData = {
 };
 
 const Register = () => {
+	const navigate = useNavigate();
 	const { showToast } = useAppContext();
 
 	const {
@@ -21,10 +23,11 @@ const Register = () => {
 		formState: { errors },
 	} = useForm<RegisterFormData>();
 
-	// react-query - so you dont have to manage any state
+	// react-query - so you don't have to manage any state
 	const mutation = useMutation(apiClient.register, {
 		onSuccess: () => {
 			showToast({ message: 'Registration successful!', type: 'SUCCESS' });
+			navigate('/');
 		},
 
 		// "Error" came from fetch request
