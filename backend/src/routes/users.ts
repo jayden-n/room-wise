@@ -53,7 +53,7 @@ router.post(
 				maxAge: 86400000, // sets the expiration time for the cookie, the same as token expired (1d)
 			});
 
-			return res.sendStatus(200);
+			return res.status(200).send({ message: 'User registered OK' });
 		} catch (error) {
 			// you don't want to send back a specific error to hackers => be generic
 			console.log(error);

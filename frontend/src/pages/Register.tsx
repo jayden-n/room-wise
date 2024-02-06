@@ -1,6 +1,8 @@
 import { useForm } from 'react-hook-form';
+import * as apiClient from '../api-client';
+import { useMutation } from 'react-query';
 
-type RegisterFormData = {
+export type RegisterFormData = {
 	email: string;
 	password: string;
 	confirmPassword: string;
@@ -16,8 +18,19 @@ const Register = () => {
 		formState: { errors },
 	} = useForm<RegisterFormData>();
 
+	// react-query - so you dont have to manage any state
+	const mutation = useMutation(apiClient.register, {
+		onSuccess: () => {
+			console.log('Register success');
+		},
+		// "Error" came from fetch request
+		onError: (error: Error) => {
+			console.log(error.message);
+		},
+	});
+
 	const onSubmit = handleSubmit((data) => {
-		console.log(data);
+		mutation.mutate(data);
 	});
 
 	return (
