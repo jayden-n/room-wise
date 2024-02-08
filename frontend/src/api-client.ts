@@ -40,6 +40,16 @@ export const login = async (formData: LoginFormData) => {
 	return responseBody;
 };
 
+export const logout = async () => {
+	const response = await fetch(`${API_BASE_URL}/api/auth/logout`, {
+		method: 'POST',
+		credentials: 'include',
+	});
+	if (!response.ok) {
+		throw new Error('Error during logout');
+	}
+};
+
 export const validateToken = async () => {
 	// GET method as default
 	const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`, {
