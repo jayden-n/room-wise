@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import * as apiClient from '../api-client';
 import { useMutation, useQueryClient } from 'react-query';
 import { useAppContext } from '../contexts/AppContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export type RegisterFormData = {
 	email: string;
@@ -133,12 +133,19 @@ const Register = () => {
 				)}
 			</label>
 
-			<span>
+			{/* ============================== SUBMIT BUTTON ============================== */}
+			<span className="flex justify-between items-center">
+				<span className="text-sm flex gap-1">
+					Already a member?
+					<Link className="underline" to="/login">
+						Login here!
+					</Link>
+				</span>
 				<button
 					type="submit"
 					className="bg-sky-500 text-white p-2 font-bold rounded hover:bg-sky-600 text-xl"
 				>
-					Create an account
+					Register
 				</button>
 			</span>
 		</form>
