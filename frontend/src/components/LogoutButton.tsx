@@ -1,13 +1,19 @@
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import * as apiClient from '../api-client';
 import { useAppContext } from '../contexts/AppContext';
 const LogoutButton = () => {
+	// get the "queryKey" that calls the GET method
+	const queryClient = useQueryClient();
+
 	const { showToast } = useAppContext();
 
 	const mutation = useMutation(apiClient.logout, {
-		onSuccess: () => {
+		onSuccess: async () => {
 			// show toast
-			showToast({ message: 'User logged out successfully', type: 'SUCCESS' });
+			showToast({ message: 'Logged out', type: 'SUCCESS' });
+			// force the "validateToken" fn to run again
+			// => to check the expired token
+			await queryClient.invalidateQueries('validateToken');
 		},
 
 		onError: (error: Error) => {
