@@ -29,6 +29,8 @@ export const AppContextProvider = ({
 				},
 			}}
 		>
+			{/* if "toast" has values, "Toast" component will render,
+            and passing props for it to conditionally operate */}
 			{toast && (
 				<Toast
 					message={toast.message}

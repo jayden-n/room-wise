@@ -27,16 +27,18 @@ const Register = () => {
 	const mutation = useMutation(apiClient.register, {
 		onSuccess: () => {
 			showToast({ message: 'Registration successful!', type: 'SUCCESS' });
+			// navigates user to homepage after registration
 			navigate('/');
 		},
 
-		// "Error" came from fetch request
+		// "Error" came from fetch request (apiClient)
 		onError: (error: Error) => {
 			showToast({ message: error.message, type: 'ERROR' });
 		},
 	});
 
 	const onSubmit = handleSubmit((data) => {
+		// pass user data to "register" fetch (from apiClient)
 		mutation.mutate(data);
 	});
 
