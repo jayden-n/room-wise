@@ -17,7 +17,7 @@ const Login = () => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors }, // error
+		formState: { errors }, // error handling
 	} = useForm<LoginFormData>();
 
 	// react-query - so you don't have to manage any state

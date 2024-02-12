@@ -28,6 +28,8 @@ const Header = () => {
 							>
 								My Hotels
 							</Link>
+
+							{/* LOGOUT */}
 							<LogoutButton />
 						</>
 					) : (
