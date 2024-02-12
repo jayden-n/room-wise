@@ -36,7 +36,7 @@ router.post(
 			await user.save(); // save user to db
 
 			// ========= GENERATE JWT SECRET KEY =========
-			// WHY?: generates a JWT for the newly created user, sets the JWT as a cookie, and sends the cookie in the response. Allowing server to identify and authorize the user.
+			// HOW?: generates a JWT for the newly created user, sets the JWT as a cookie, and sends the cookie in the response. Allowing server to identify and authorize the user.
 
 			const token = jwt.sign(
 				{ userId: user.id },

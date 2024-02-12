@@ -1,3 +1,4 @@
+import { verifyToken } from '../middleware/auth';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import express, { Request, Response } from 'express';
@@ -69,5 +70,20 @@ router.post(
 		}
 	},
 );
+
+// for the front-end to make request to get the cookie, since front-end cannot access to cookie
+router.get('/validate-token', verifyToken, (req: Request, res: Response) => {
+	res.status(200).send({ userId: req.userId });
+});
+
+router.post('/logout', (req: Request, res: Response) => {
+	// set a new token that expires immediately
+	res.cookie('auth_token', '', {
+		expires: new Date(0), // immediately
+	});
+
+	// have to send back
+	res.send();
+});
 
 export default router;

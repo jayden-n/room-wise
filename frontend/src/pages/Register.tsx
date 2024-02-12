@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import * as apiClient from '../api-client';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { useAppContext } from '../contexts/AppContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export type RegisterFormData = {
 	email: string;
@@ -13,6 +13,7 @@ export type RegisterFormData = {
 };
 
 const Register = () => {
+	const queryClient = useQueryClient();
 	const navigate = useNavigate();
 	const { showToast } = useAppContext();
 
@@ -25,18 +26,22 @@ const Register = () => {
 
 	// react-query - so you don't have to manage any state
 	const mutation = useMutation(apiClient.register, {
-		onSuccess: () => {
+		onSuccess: async () => {
 			showToast({ message: 'Registration successful!', type: 'SUCCESS' });
+
+			await queryClient.invalidateQueries('validateToken');
+			// navigates user to homepage after registration
 			navigate('/');
 		},
 
-		// "Error" came from fetch request
+		// "Error" came from fetch request (apiClient)
 		onError: (error: Error) => {
 			showToast({ message: error.message, type: 'ERROR' });
 		},
 	});
 
 	const onSubmit = handleSubmit((data) => {
+		// pass user data to "register" fetch (from apiClient)
 		mutation.mutate(data);
 	});
 
@@ -128,12 +133,19 @@ const Register = () => {
 				)}
 			</label>
 
-			<span>
+			{/* ============================== SUBMIT BUTTON ============================== */}
+			<span className="flex justify-between items-center">
+				<span className="text-sm flex gap-1">
+					Already a member?
+					<Link className="underline" to="/login">
+						Login here!
+					</Link>
+				</span>
 				<button
 					type="submit"
 					className="bg-sky-500 text-white p-2 font-bold rounded hover:bg-sky-600 text-xl"
 				>
-					Create an account
+					Register
 				</button>
 			</span>
 		</form>
