@@ -5,6 +5,7 @@ import mongoose from 'mongoose'; // interact with db
 import userRoutes from './routes/users';
 import authRoutes from './routes/auth';
 import cookieParser from 'cookie-parser';
+import path from 'path';
 
 mongoose.connect(process.env.MONGO_CONNECTION_STRING as string);
 
@@ -20,7 +21,9 @@ app.use(
 	}),
 ); // prevents certain requests from certain wrong URLs (blocked)
 
-// =============== ROUTES ===============
+app.use(express.static(path.join(__dirname, '../../frontend/dist')));
+
+// =============== ENDPOINTS ===============
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 
