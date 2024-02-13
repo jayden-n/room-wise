@@ -16,6 +16,7 @@ export const verifyToken = (
 	res: Response,
 	next: NextFunction,
 ) => {
+	// get the cookie form request
 	const token = req.cookies['auth_token'];
 
 	if (!token) {
