@@ -19,8 +19,8 @@ const TypesSection = () => {
 						<label
 							className={
 								typeWatch === type
-									? 'cursor-pointer  bg-sky-300 px-4 py-2 text-sm rounded-full font-semibold'
-									: 'cursor-pointer hover:bg-gray-200 bg-gray-300 duration-300 px-4 py-2 text-sm rounded-full font-semibold'
+									? 'cursor-pointer  bg-sky-300 px-4 py-2 flex items-center text-center justify-center text-sm rounded-full font-semibold'
+									: 'cursor-pointer hover:bg-gray-200 flex items-center text-center justify-center bg-gray-300 duration-300 px-4 py-2 text-sm rounded-full font-semibold'
 							}
 							key={index}
 						>

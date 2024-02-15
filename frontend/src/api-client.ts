@@ -65,6 +65,7 @@ export const validateToken = async () => {
 };
 
 // add hotel
+// has to be type FormData for file uploading
 export const addMyHotel = async (hotelFormData: FormData) => {
 	const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
 		method: 'POST',

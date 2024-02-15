@@ -38,7 +38,7 @@ router.post(
 			.withMessage('Facilities is required'),
 	],
 
-	upload.array('imageFiles', 6),
+	upload.array('imageFiles', 6), // make sure to receive only 6 image files
 	async (req: Request, res: Response) => {
 		try {
 			const imageFiles = req.files as Express.Multer.File[]; // image file from request
