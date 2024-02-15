@@ -1,3 +1,4 @@
+import { HotelFormData } from './forms/ManageHotelForm/ManageHotelForm';
 import { LoginFormData } from './pages/Login';
 import { RegisterFormData } from './pages/Register';
 
@@ -58,6 +59,21 @@ export const validateToken = async () => {
 
 	if (!response.ok) {
 		throw new Error('Token invalid');
+	}
+
+	return response.json();
+};
+
+// add hotel
+export const addMyHotel = async (hotelFormData: FormData) => {
+	const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
+		method: 'POST',
+		credentials: 'include', // include any HTTP cookies along with the request (TELL THE BROWSER TO SET THE COOKIE)
+		body: hotelFormData,
+	});
+
+	if (!response.ok) {
+		throw new Error('Failed to add hotel');
 	}
 
 	return response.json();

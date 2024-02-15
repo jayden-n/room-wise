@@ -19,7 +19,12 @@ export type HotelFormData = {
 	imageFiles: FileList;
 };
 
-const ManageHotelForm = () => {
+type Props = {
+	onSave: (hotelFormData: FormData) => void;
+	isLoading: boolean;
+};
+
+const ManageHotelForm = ({ onSave, isLoading }: Props) => {
 	const formMethods = useForm<HotelFormData>();
 	const { handleSubmit } = formMethods;
 
@@ -31,6 +36,7 @@ const ManageHotelForm = () => {
 		formData.append('city', formDataJSON.city);
 		formData.append('country', formDataJSON.country);
 		formData.append('description', formDataJSON.description);
+		formData.append('type', formDataJSON.type);
 		formData.append('pricePerNight', formDataJSON.pricePerNight.toString());
 		formData.append('starRating', formDataJSON.starRating.toString());
 		formData.append('adultCount', formDataJSON.adultCount.toString());
@@ -38,12 +44,15 @@ const ManageHotelForm = () => {
 
 		// facilities: string[];
 		formDataJSON.facilities.forEach((facility, index) => {
-			formData.append(`facility[${index}]`, facility); // how you send array to server when working with formData
+			formData.append(`facilities[${index}]`, facility); // how you send array to server when working with formData
 		});
 
 		Array.from(formDataJSON.imageFiles).forEach((imageFile) => {
-			formData.append('imageFile', imageFile); // multer will handle this
+			formData.append('imageFiles', imageFile); // multer will handle this
 		});
+
+		// submit the data to this "prop Function"
+		onSave(formData);
 	});
 
 	return (
@@ -58,9 +67,10 @@ const ManageHotelForm = () => {
 				<span className="flex justify-end">
 					<button
 						type="submit"
-						className="bg-sky-500 text-white p-2 font-bold hover:bg-sky-400 text-xl rounded-md"
+						className="bg-sky-500 text-white p-2 font-bold hover:bg-sky-400 text-xl rounded-md disabled:bg-gray-500"
+						disabled={isLoading}
 					>
-						Add hotel
+						{isLoading ? 'Adding...' : 'Add hotel'}
 					</button>
 				</span>
 			</form>
