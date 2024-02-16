@@ -19,8 +19,8 @@ test('should allow the user to login', async ({ page }) => {
 	).toBeVisible();
 
 	// make sure to have email/password input (separate database)
-	await page.locator('[name=email]').fill('test@test.com');
-	await page.locator('[name=password]').fill('password123');
+	await page.getByLabel(/email/i).fill('test@test.com');
+	await page.getByLabel(/password/i).fill('password123');
 
 	// make sure to click on Login button after filling in login form
 	await page.getByRole('button', { name: /login/i }).click();
