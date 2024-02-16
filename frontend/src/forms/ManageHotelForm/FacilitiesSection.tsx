@@ -11,9 +11,12 @@ const FacilitiesSection = () => {
 		<div>
 			<h2 className="text-2xl font-bold mb-3">Facilities</h2>
 			<div className="grid lg:grid-cols-4  gap-2 grid-cols-2">
-				{hotelFacilities.map((facility) => {
+				{hotelFacilities.map((facility, index) => {
 					return (
-						<label className="cursor-pointer flex items-center gap-1 text-gray-700">
+						<label
+							key={index}
+							className="cursor-pointer flex items-center gap-1 text-gray-700"
+						>
 							<input
 								{...register('facilities', {
 									// make sure a facility is checked
