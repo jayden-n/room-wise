@@ -22,10 +22,6 @@ export const AppContextProvider = ({
 	children: React.ReactNode;
 }) => {
 	const [toast, setToast] = useState<ToastMessage | undefined>(undefined);
-
-	// queryKey: "validateToken"
-	// (call the function) queryFn: apiClient.validateToken
-	// --- check for error ---
 	const { isError } = useQuery('validateToken', apiClient.validateToken, {
 		retry: false,
 	});
@@ -34,15 +30,12 @@ export const AppContextProvider = ({
 		<AppContext.Provider
 			value={{
 				showToast: (toastMessage) => {
-					// message & type will be sent back to "toast" state here
 					setToast(toastMessage);
 				},
 				// isLoggedIn will be passed when isError that you get from response is true
 				isLoggedIn: !isError,
 			}}
 		>
-			{/* if "toast" has values, "Toast" component will render,
-            and passing props for it to conditionally operate */}
 			{toast && (
 				<Toast
 					message={toast.message}
