@@ -3,7 +3,6 @@ import path from 'path';
 
 const UI_URL = 'http://localhost:5173';
 
-// before each test below this runs
 test.beforeEach('should allow user to login first', async ({ page }) => {
 	await page.goto(UI_URL);
 	await page.getByRole('link', { name: /login/i }).click();

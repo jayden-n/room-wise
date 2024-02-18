@@ -36,7 +36,7 @@ const MyHotels = () => {
 				</Link>
 			</span>
 
-			<div className="grid lg:grid-cols-2 grid-cols-1 gap-8">
+			<div className="grid  grid-cols-1 gap-8">
 				{hotelData.map((hotel) => {
 					return (
 						<div
@@ -49,7 +49,7 @@ const MyHotels = () => {
 							</div>
 
 							{/* hotel info */}
-							<div className="grid lg:grid-cols-3 grid-cols-1 gap-4 ">
+							<div className="grid md:grid-cols-3 grid-cols-1 gap-4 ">
 								<div className="border border-zinc-300 flex rounded-md justify-center items-center gap-2 p-4">
 									<FaLocationDot />
 									{hotel.city}, {hotel.country}
