@@ -23,7 +23,7 @@ export type HotelFormData = {
 };
 
 type Props = {
-	hotel: HotelType;
+	hotel?: HotelType;
 	onSave: (hotelFormData: FormData) => void;
 	isLoading: boolean;
 };
@@ -41,6 +41,7 @@ const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
 	const onSubmit = handleSubmit((formDataJSON: HotelFormData) => {
 		const formData = new FormData();
 
+		// on edit mode
 		if (hotel) {
 			formData.append('hotelId', hotel._id);
 		}
@@ -57,8 +58,15 @@ const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
 
 		// facilities: string[];
 		formDataJSON.facilities.forEach((facility, index) => {
-			formData.append(`facilities[${index}]`, facility); // how you send array to server when working with formData
+			formData.append(`facilities[${index}]`, facility); // sending array to server when working with formData
 		});
+
+		// on edit mode
+		if (formDataJSON.imageUrls) {
+			formDataJSON.imageUrls.forEach((url, index) => {
+				formData.append(`imageUrls[${index}]`, url);
+			});
+		}
 
 		Array.from(formDataJSON.imageFiles).forEach((imageFile) => {
 			formData.append('imageFiles', imageFile); // multer will handle
@@ -83,7 +91,7 @@ const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
 						className="bg-sky-500 text-white p-2 font-bold hover:bg-sky-400 text-xl rounded-md disabled:bg-gray-500"
 						disabled={isLoading}
 					>
-						{isLoading ? 'Adding...' : 'Add hotel'}
+						{isLoading ? 'Saving...' : 'Save'}
 					</button>
 				</span>
 			</form>

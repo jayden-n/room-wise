@@ -7,7 +7,7 @@ const AddHotel = () => {
 	const { showToast } = useAppContext();
 	const { mutate, isLoading } = useMutation(apiClient.addMyHotel, {
 		onSuccess: () => {
-			showToast({ message: 'Hotel added!', type: 'SUCCESS' });
+			showToast({ message: 'Hotel saved!', type: 'SUCCESS' });
 		},
 		onError: () => {
 			showToast({ message: 'Error saving hotel', type: 'ERROR' });
