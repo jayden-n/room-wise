@@ -44,18 +44,18 @@ function App() {
 							}
 						/>
 						<Route
-							path="/my-hotels"
+							path="/edit-hotel/:hotelId"
 							element={
 								<Layout>
-									<MyHotels />
+									<EditHotel />
 								</Layout>
 							}
 						/>
 						<Route
-							path="/edit-hotel/:id"
+							path="/my-hotels"
 							element={
 								<Layout>
-									<EditHotel />
+									<MyHotels />
 								</Layout>
 							}
 						/>

@@ -4,6 +4,8 @@ import TypesSection from './TypesSection';
 import FacilitiesSection from './FacilitiesSection';
 import GuestsSection from './GuestsSection';
 import ImagesSection from './ImagesSection';
+import { HotelType } from '../../../../backend/src/shared/types';
+import { useEffect } from 'react';
 
 export type HotelFormData = {
 	name: string;
@@ -17,21 +19,33 @@ export type HotelFormData = {
 	adultCount: number;
 	childCount: number;
 	imageFiles: FileList;
+	imageUrls: string[];
 };
 
 type Props = {
+	hotel?: HotelType;
 	onSave: (hotelFormData: FormData) => void;
 	isLoading: boolean;
 };
 
-const ManageHotelForm = ({ onSave, isLoading }: Props) => {
+const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
 	const formMethods = useForm<HotelFormData>();
-	const { handleSubmit } = formMethods;
+	const { handleSubmit, reset } = formMethods;
 
-	// formDataJSON is from our front-end form
+	// ensures when a hotel prop is passed in...
+	// ...the form will populate with the data from that hotel.
+	useEffect(() => {
+		reset(hotel);
+	}, [hotel, reset]);
+
 	const onSubmit = handleSubmit((formDataJSON: HotelFormData) => {
-		// create new FormData object & call our API
 		const formData = new FormData();
+
+		// on edit mode
+		if (hotel) {
+			formData.append('hotelId', hotel._id);
+		}
+
 		formData.append('name', formDataJSON.name);
 		formData.append('city', formDataJSON.city);
 		formData.append('country', formDataJSON.country);
@@ -44,8 +58,15 @@ const ManageHotelForm = ({ onSave, isLoading }: Props) => {
 
 		// facilities: string[];
 		formDataJSON.facilities.forEach((facility, index) => {
-			formData.append(`facilities[${index}]`, facility); // how you send array to server when working with formData
+			formData.append(`facilities[${index}]`, facility); // sending array to server when working with formData
 		});
+
+		// on edit mode
+		if (formDataJSON.imageUrls) {
+			formDataJSON.imageUrls.forEach((url, index) => {
+				formData.append(`imageUrls[${index}]`, url);
+			});
+		}
 
 		Array.from(formDataJSON.imageFiles).forEach((imageFile) => {
 			formData.append('imageFiles', imageFile); // multer will handle
@@ -70,7 +91,7 @@ const ManageHotelForm = ({ onSave, isLoading }: Props) => {
 						className="bg-sky-500 text-white p-2 font-bold hover:bg-sky-400 text-xl rounded-md disabled:bg-gray-500"
 						disabled={isLoading}
 					>
-						{isLoading ? 'Adding...' : 'Add hotel'}
+						{isLoading ? 'Saving...' : 'Save'}
 					</button>
 				</span>
 			</form>
