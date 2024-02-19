@@ -1,10 +1,11 @@
 import express, { Request, Response, Router } from 'express';
 import multer from 'multer';
 import { v2 as cloudinary } from 'cloudinary';
-import Hotel from '../models/hotel';
+
 import { HotelType } from '../shared/types';
 import { verifyToken } from '../middleware/auth';
 import { body } from 'express-validator';
+import Hotel from '../models/hotel';
 
 const router: Router = express.Router();
 
@@ -84,11 +85,11 @@ router.get('/', verifyToken, async (req: Request, res: Response) => {
 });
 
 // api/my-hotels/123456789
-router.get('/:id', verifyToken, async (req: Request, res: Response) => {
-	const id = req.params.id.toString();
+router.get('/:hotelId', verifyToken, async (req: Request, res: Response) => {
+	const id = req.params.hotelId.toString();
 
 	try {
-		const hotel = Hotel.find({
+		const hotel = await Hotel.findOne({
 			_id: id,
 			userId: req.userId,
 		});
