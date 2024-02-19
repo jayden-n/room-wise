@@ -48,10 +48,10 @@ const ManageHotelForm = ({ onSave, isLoading }: Props) => {
 		});
 
 		Array.from(formDataJSON.imageFiles).forEach((imageFile) => {
-			formData.append('imageFiles', imageFile); // multer will handle this
+			formData.append('imageFiles', imageFile); // multer will handle
 		});
 
-		// submit the data to this "prop Function"
+		// submit the data
 		onSave(formData);
 	});
 
