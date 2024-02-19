@@ -19,6 +19,7 @@ export type HotelFormData = {
 	adultCount: number;
 	childCount: number;
 	imageFiles: FileList;
+	imageUrls: string[];
 };
 
 type Props = {
@@ -31,18 +32,19 @@ const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
 	const formMethods = useForm<HotelFormData>();
 	const { handleSubmit, reset } = formMethods;
 
+	// ensures when a hotel prop is passed in...
+	// ...the form will populate with the data from that hotel.
 	useEffect(() => {
 		reset(hotel);
 	}, [hotel, reset]);
 
-	// formDataJSON is from our front-end form
 	const onSubmit = handleSubmit((formDataJSON: HotelFormData) => {
-		// create new FormData object & call our API
 		const formData = new FormData();
 
 		if (hotel) {
 			formData.append('hotelId', hotel._id);
 		}
+
 		formData.append('name', formDataJSON.name);
 		formData.append('city', formDataJSON.city);
 		formData.append('country', formDataJSON.country);
