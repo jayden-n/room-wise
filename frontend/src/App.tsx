@@ -41,7 +41,7 @@ function App() {
 							path="/add-hotel"
 							element={
 								<Layout>
-									<AddHotel />
+									<AddHotel queryClient={queryClient} />
 								</Layout>
 							}
 						/>
@@ -49,7 +49,7 @@ function App() {
 							path="/edit-hotel/:hotelId"
 							element={
 								<Layout>
-									<EditHotel />
+									<EditHotel queryClient={queryClient} />
 								</Layout>
 							}
 						/>
@@ -57,7 +57,7 @@ function App() {
 							path="/my-hotels"
 							element={
 								<Layout>
-									<MyHotels />
+									<MyHotels queryClient={queryClient} />
 								</Layout>
 							}
 						/>

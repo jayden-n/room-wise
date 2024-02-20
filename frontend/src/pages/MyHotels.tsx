@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as apiClient from '../api-client';
-import { useMutation, useQuery } from 'react-query';
+import { QueryClient, useMutation, useQuery } from 'react-query';
 import { useAppContext } from '../contexts/AppContext';
 import { FaLocationDot } from 'react-icons/fa6';
 import { FaBuilding } from 'react-icons/fa';
@@ -8,7 +8,12 @@ import { FaMoneyBill } from 'react-icons/fa';
 import { FaBed } from 'react-icons/fa';
 import { FaStar } from 'react-icons/fa';
 
-const MyHotels = () => {
+type Props = {
+	queryClient: QueryClient;
+};
+
+const MyHotels = ({ queryClient }: Props) => {
+	const navigate = useNavigate();
 	const { showToast } = useAppContext();
 	const { data: hotelData } = useQuery(
 		'fetchMyHotels',
@@ -26,6 +31,10 @@ const MyHotels = () => {
 		},
 		onError: () => {
 			showToast({ message: 'Error deleting hotel', type: 'ERROR' });
+		},
+		onSettled: () => {
+			queryClient.invalidateQueries(['fetchMyHotels']);
+			navigate('/my-hotels');
 		},
 	});
 

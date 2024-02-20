@@ -1,10 +1,15 @@
-import { useMutation, useQuery } from 'react-query';
+import { QueryClient, useMutation, useQuery } from 'react-query';
 import * as apiClient from '../api-client';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ManageHotelForm from '../forms/ManageHotelForm/ManageHotelForm';
 import { useAppContext } from '../contexts/AppContext';
 
-const EditHotel = () => {
+type Props = {
+	queryClient: QueryClient;
+};
+
+const EditHotel = ({ queryClient }: Props) => {
+	const navigate = useNavigate();
 	const { showToast } = useAppContext();
 	const { hotelId } = useParams();
 
@@ -22,6 +27,10 @@ const EditHotel = () => {
 		},
 		onError: () => {
 			showToast({ message: 'Error saving hotel', type: 'ERROR' });
+		},
+		onSettled: () => {
+			queryClient.invalidateQueries(['fetchMyHotels']);
+			navigate('/my-hotels');
 		},
 	});
 
