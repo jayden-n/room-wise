@@ -6,9 +6,11 @@ import { useAppContext } from './contexts/AppContext';
 import AddHotel from './pages/AddHotel';
 import MyHotels from './pages/MyHotels';
 import EditHotel from './pages/EditHotel';
+import { useQueryClient } from 'react-query';
 
 function App() {
 	const { isLoggedIn } = useAppContext();
+	const queryClient = useQueryClient();
 
 	return (
 		<BrowserRouter>
@@ -39,7 +41,7 @@ function App() {
 							path="/add-hotel"
 							element={
 								<Layout>
-									<AddHotel />
+									<AddHotel queryClient={queryClient} />
 								</Layout>
 							}
 						/>
@@ -47,7 +49,7 @@ function App() {
 							path="/edit-hotel/:hotelId"
 							element={
 								<Layout>
-									<EditHotel />
+									<EditHotel queryClient={queryClient} />
 								</Layout>
 							}
 						/>
@@ -55,7 +57,7 @@ function App() {
 							path="/my-hotels"
 							element={
 								<Layout>
-									<MyHotels />
+									<MyHotels queryClient={queryClient} />
 								</Layout>
 							}
 						/>

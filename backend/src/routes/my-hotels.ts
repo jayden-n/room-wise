@@ -20,6 +20,7 @@ const upload = multer({
 	},
 });
 
+// ======================== CREATE HOTEL ========================
 // api/my-hotels
 router.post(
 	'/',
@@ -67,6 +68,7 @@ router.post(
 	},
 );
 
+// ======================== GET ALL HOTELS ========================
 router.get('/', verifyToken, async (req: Request, res: Response) => {
 	try {
 		const hotels = await Hotel.find({ userId: req.userId }); //array
@@ -76,6 +78,7 @@ router.get('/', verifyToken, async (req: Request, res: Response) => {
 	}
 });
 
+// ======================== GET SINGLE HOTEL ========================
 // api/my-hotels/123456789
 router.get('/:hotelId', verifyToken, async (req: Request, res: Response) => {
 	const id = req.params.hotelId.toString();
@@ -91,6 +94,7 @@ router.get('/:hotelId', verifyToken, async (req: Request, res: Response) => {
 	}
 });
 
+// ======================== UPDATE HOTEL ========================
 router.put(
 	'/:hotelId',
 	verifyToken,
@@ -108,6 +112,7 @@ router.put(
 				updatedHotel,
 				{ new: true }, // most updated props
 			);
+
 			if (!hotel) {
 				return res.status(404).json({ message: 'Hotel not found' });
 			}
@@ -127,6 +132,12 @@ router.put(
 		}
 	},
 );
+
+// ======================== DELETE HOTEL ========================
+router.delete('/:hotelId', verifyToken, async (req: Request, res: Response) => {
+	const removedHotel = await Hotel.findByIdAndDelete(req.params.hotelId);
+	res.status(200).json(removedHotel);
+});
 
 // reusable function
 async function uploadImages(imageFiles: Express.Multer.File[]) {

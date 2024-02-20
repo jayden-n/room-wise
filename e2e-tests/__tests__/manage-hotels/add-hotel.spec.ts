@@ -48,6 +48,6 @@ test('should allow user to add a hotel', async ({ page }) => {
 	]);
 
 	// submit button
-	await page.getByRole('button', { name: /add hotel/i }).click();
+	await page.getByRole('button', { name: /save/i }).click();
 	await expect(page.getByText(/hotel saved!/i)).toBeVisible(); // successful
 });

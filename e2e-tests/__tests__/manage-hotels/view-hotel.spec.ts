@@ -21,7 +21,7 @@ test('should display hotels', async ({ page }) => {
 	await expect(page.getByRole('heading', { name: /my hotels/i })).toBeVisible();
 
 	await expect(
-		page.getByRole('heading', { name: /Name: Jayden Nguyen/i }),
+		page.getByRole('heading', { name: /Name: khach san 5 sao/i }),
 	).toBeVisible();
 
 	await expect(page.getByText(/Desc: 32das/i)).toBeVisible();

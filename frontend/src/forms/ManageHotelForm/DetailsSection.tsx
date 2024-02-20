@@ -1,7 +1,12 @@
 import { useFormContext } from 'react-hook-form';
 import { HotelFormData } from './ManageHotelForm';
+import { HotelType } from '../../../../backend/src/shared/types';
 
-const DetailsSection = () => {
+type Props = {
+	hotel?: HotelType;
+};
+
+const DetailsSection = ({ hotel }: Props) => {
 	const {
 		register,
 		formState: { errors },
@@ -9,7 +14,9 @@ const DetailsSection = () => {
 
 	return (
 		<div className="flex flex-col gap-4">
-			<h1 className="text-3xl font-bold mb-3">Add Hotel</h1>
+			<h1 className="text-3xl font-bold mb-3">
+				{hotel ? 'Edit Hotel' : 'Add Hotel'}
+			</h1>
 
 			{/* ============================== HOTEL NAME ============================== */}
 			<label className="flex-1 text-sm font-bold  text-gray-700">
