@@ -108,6 +108,7 @@ router.put(
 				updatedHotel,
 				{ new: true }, // most updated props
 			);
+
 			if (!hotel) {
 				return res.status(404).json({ message: 'Hotel not found' });
 			}
