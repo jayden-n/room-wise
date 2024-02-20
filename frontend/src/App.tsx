@@ -6,9 +6,11 @@ import { useAppContext } from './contexts/AppContext';
 import AddHotel from './pages/AddHotel';
 import MyHotels from './pages/MyHotels';
 import EditHotel from './pages/EditHotel';
+import { useQueryClient } from 'react-query';
 
 function App() {
 	const { isLoggedIn } = useAppContext();
+	const queryClient = useQueryClient();
 
 	return (
 		<BrowserRouter>

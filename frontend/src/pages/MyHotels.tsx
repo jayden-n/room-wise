@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import * as apiClient from '../api-client';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { useAppContext } from '../contexts/AppContext';
 import { FaLocationDot } from 'react-icons/fa6';
 import { FaBuilding } from 'react-icons/fa';
@@ -20,14 +20,25 @@ const MyHotels = () => {
 		},
 	);
 
-	if (!hotelData) {
-		return <span>No hotel found</span>;
-	}
+	const { mutate, isLoading } = useMutation(apiClient.deleteHotelById, {
+		onSuccess: () => {
+			showToast({ message: 'Hotel deleted!', type: 'SUCCESS' });
+		},
+		onError: () => {
+			showToast({ message: 'Error deleting hotel', type: 'ERROR' });
+		},
+	});
+
+	const handleDelete = (hotelId: string) => {
+		mutate(hotelId);
+	};
 
 	return (
 		<div className="space-y-5">
 			<span className="flex justify-between items-center">
-				<h1 className="text-3xl font-bold">My Hotels</h1>
+				<h1 className="text-3xl font-bold">
+					{hotelData?.length === 0 ? 'No hotel found :(' : 'My hotels'}
+				</h1>
 				<Link
 					to="/add-hotel"
 					className=" bg-sky-500 font-bold p-2 rounded-md text-xl text-white hover:bg-sky-400"
@@ -37,7 +48,7 @@ const MyHotels = () => {
 			</span>
 
 			<div className="grid  grid-cols-1 gap-8">
-				{hotelData.map((hotel) => {
+				{hotelData?.map((hotel) => {
 					return (
 						<div
 							key={hotel._id}
@@ -70,10 +81,17 @@ const MyHotels = () => {
 									{hotel.adultCount} adults, {hotel.childCount} children
 								</div>
 							</div>
-							<span className="flex justify-end">
+							<span className="flex justify-end gap-4">
+								<button
+									onClick={() => handleDelete(hotel._id)}
+									className="bg-red-500 hover:bg-red-400 font-bold p-2 rounded-md text-xl text-white"
+									disabled={isLoading}
+								>
+									Delete
+								</button>
 								<Link
 									to={`/edit-hotel/${hotel._id}`}
-									className='	className=" bg-zinc-400 hover:bg-zinc-300 font-bold p-2 rounded-md text-xl text-white "'
+									className="bg-zinc-400 hover:bg-zinc-300 font-bold p-2 rounded-md text-xl text-white"
 								>
 									View Details
 								</Link>

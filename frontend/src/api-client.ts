@@ -122,3 +122,16 @@ export const updateMyHotelById = async (hotelFormData: FormData) => {
 
 	return response.json();
 };
+
+export const deleteHotelById = async (hotelId: string) => {
+	const response = await fetch(`${API_BASE_URL}/api/my-hotels/${hotelId}`, {
+		method: 'DELETE',
+		credentials: 'include',
+	});
+
+	if (!response.ok) {
+		throw new Error('Failed to update hotel');
+	}
+
+	return response.json();
+};
