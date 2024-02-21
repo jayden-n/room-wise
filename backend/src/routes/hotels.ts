@@ -1,12 +1,15 @@
 import express, { Request, Response } from 'express';
 import Hotel from '../models/hotel';
 import { HotelSearchResponse } from '../shared/types';
+import { constructSearchQuery } from '../utils/query';
 
 const router = express.Router();
 
 // /api/hotels/search?
 router.get('/search', async (req: Request, res: Response) => {
 	try {
+		const query = constructSearchQuery(req.query);
+		// console.log(query);
 		const pageSize = 5;
 
 		// page "request" has to be a number
@@ -17,7 +20,7 @@ router.get('/search', async (req: Request, res: Response) => {
 		// pageNumber = 3
 		const skip = (pageNumber - 1) * pageSize;
 		const hotels = await Hotel.find().skip(skip).limit(pageSize);
-		const total = await Hotel.countDocuments();
+		const total = await Hotel.countDocuments(query);
 
 		const response: HotelSearchResponse = {
 			data: hotels,

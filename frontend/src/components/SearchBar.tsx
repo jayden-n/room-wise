@@ -9,7 +9,7 @@ const SearchBar = () => {
 	const search = useSearchContext();
 	const navigate = useNavigate();
 
-	// use local states to prevent whole app from re-rendering too many times
+	// store in local states to prevent whole app from re-rendering too many times
 	const [destination, setDestination] = useState<string>(search.destination);
 	const [checkIn, setCheckIn] = useState<Date>(search.checkIn);
 	const [checkOut, setCheckOut] = useState<Date>(search.checkOut);
@@ -45,7 +45,7 @@ const SearchBar = () => {
 					<MdTravelExplore size={25} className="mr-2" />
 					<input
 						type="text"
-						placeholder="Where do you want to go?"
+						placeholder="Search by location..."
 						className="text-md w-full focus:outline-none italic"
 						value={destination}
 						onChange={(event) => setDestination(event.target.value)}
