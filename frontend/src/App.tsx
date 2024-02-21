@@ -7,6 +7,7 @@ import AddHotel from './pages/AddHotel';
 import MyHotels from './pages/MyHotels';
 import EditHotel from './pages/EditHotel';
 import { useQueryClient } from 'react-query';
+import Search from './pages/Search';
 
 function App() {
 	const { isLoggedIn } = useAppContext();
@@ -16,7 +17,14 @@ function App() {
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<Layout>Homepage</Layout>} />
-				<Route path="/search" element={<Layout>Search Page</Layout>} />
+				<Route
+					path="/search"
+					element={
+						<Layout>
+							<Search />
+						</Layout>
+					}
+				/>
 				<Route
 					path="/register"
 					element={
