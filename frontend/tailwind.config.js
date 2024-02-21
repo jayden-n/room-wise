@@ -2,7 +2,11 @@
 export default {
 	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
 	theme: {
-		extend: {},
+		extend: {
+			fontFamily: {
+				poppins: ['Poppins', 'sans-serif'],
+			},
+		},
 		container: {
 			padding: '5rem',
 		},

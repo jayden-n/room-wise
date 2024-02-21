@@ -9,7 +9,7 @@ interface ILayoutProps {
 
 const Layout = ({ children }: ILayoutProps) => {
 	return (
-		<div className="flex min-h-screen flex-col">
+		<div className="font-poppins flex min-h-screen flex-col">
 			<Header />
 			<Hero />
 			<div className="container mx-auto">
