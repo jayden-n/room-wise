@@ -7,7 +7,7 @@ type Props = {
 };
 
 const SearchResultCard = ({ hotel }: Props) => {
-	console.log(hotel);
+	// console.log(hotel);
 	const hotelImage = hotel.imageUrls[0];
 	const hotelStarRating = hotel.starRating;
 	const hotelType = hotel.type;
@@ -55,8 +55,11 @@ const SearchResultCard = ({ hotel }: Props) => {
 				<div className="grid grid-cols-1 md:grid-cols-2 items-end whitespace-nowrap">
 					<div className="flex gap-1 items-center">
 						{/* get the first 3 */}
-						{hotelFacilities.slice(0, 3).map((facility) => (
-							<span className="p-2 font-bold  text-xs whitespace-nowrap bg-zinc-300 rounded-lg">
+						{hotelFacilities.slice(0, 3).map((facility, index) => (
+							<span
+								key={index}
+								className="p-2 font-bold  text-xs whitespace-nowrap bg-zinc-300 rounded-lg"
+							>
 								{facility}
 							</span>
 						))}
