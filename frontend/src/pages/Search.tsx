@@ -45,6 +45,7 @@ const Search = () => {
 							</span>
 							{/* toto: sort options */}
 						</div>
+
 						{hotelData?.data.map((hotel) => (
 							<SearchResultCard key={hotel._id} hotel={hotel} />
 						))}

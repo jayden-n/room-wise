@@ -17,7 +17,7 @@ const SearchResultCard = ({ hotel }: Props) => {
 	const hotelPricePerNight = hotel.pricePerNight;
 
 	return (
-		<div className="grid grid-cols-1 xl:grid-cols-[1fr_3fr] border border-zinc-300 rounded-md p-8 gap-8">
+		<div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] border border-zinc-100  shadow-lg  rounded-md p-8 gap-8">
 			<div className="w-full h-[300px]">
 				<img
 					src={hotelImage}
@@ -26,7 +26,7 @@ const SearchResultCard = ({ hotel }: Props) => {
 				/>
 			</div>
 
-			<div className="grid grid-rows-[1fr_2fr_1fr]">
+			<div className="grid md:grid-rows-[1fr_2fr_1fr] grid-rows-[1fr_1.5fr_1fr]">
 				{/* stars & hotel name */}
 				<div className="flex flex-col gap-2">
 					<div className="flex items-center gap-2">
@@ -38,8 +38,12 @@ const SearchResultCard = ({ hotel }: Props) => {
 						<span className="text-sm italic">{hotelType}</span>
 					</div>
 
-					{/* hotel name */}
-					<h2 className="font-semibold text-2xl cursor-pointer">{hotelName}</h2>
+					<Link
+						to={`/detail/${hotel._id}`}
+						className="font-semibold text-2xl cursor-pointer hover:underline"
+					>
+						{hotelName}
+					</Link>
 				</div>
 
 				{/* description */}
@@ -47,12 +51,12 @@ const SearchResultCard = ({ hotel }: Props) => {
 					<p className="line-clamp-4">{hotelDescription}</p>
 				</div>
 
-				{/* facilities & price & view more */}
-				<div className="grid grid-cols-2 items-end whitespace-nowrap">
-					<div className="flex gap-2 items-center">
+				{/* facilities & price & "View More" */}
+				<div className="grid grid-cols-1 md:grid-cols-2 items-end whitespace-nowrap">
+					<div className="flex gap-1 items-center">
 						{/* get the first 3 */}
 						{hotelFacilities.slice(0, 3).map((facility) => (
-							<span className="p-2 font-bold text-xs whitespace-nowrap bg-zinc-300 rounded-lg">
+							<span className="p-2 font-bold  text-xs whitespace-nowrap bg-zinc-300 rounded-lg">
 								{facility}
 							</span>
 						))}
@@ -65,14 +69,17 @@ const SearchResultCard = ({ hotel }: Props) => {
 					</div>
 
 					{/* price per night */}
-					<div className="flex flex-col gap-1 items-end whitespace-nowrap">
-						<span className="font-semibold italic mr-1">
+					<div className="flex flex-col gap-1 items-center  md:items-end whitespace-nowrap">
+						<span className="font-semibold italic md:mr-1 md:mt-0 mt-4">
 							${hotelPricePerNight} <span> per night</span>
 						</span>
 
-						<button className="p-2 h-full text-xl max-w-fit bg-sky-400 text-white font-semibold rounded-lg hover:bg-sky-500">
+						<Link
+							to={`/detail/${hotel._id}`}
+							className="p-2 flex items-center justify-center h-full text-xl max-w-full md:max-w-fit bg-sky-400 text-white font-semibold rounded-lg hover:bg-sky-500 w-full "
+						>
 							View More
-						</button>
+						</Link>
 					</div>
 				</div>
 			</div>
