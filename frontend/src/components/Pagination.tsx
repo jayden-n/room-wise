@@ -18,7 +18,9 @@ const Pagination = ({ page, pages, onPageChange }: Props) => {
 				{pageNumbers.map((number) => (
 					<button
 						onClick={() => onPageChange(number)}
-						className={`px-2 py-1 ${page === number ? 'bg-gray-200' : ''}`}
+						className={`px-2 py-1 ${
+							page === number ? 'bg-sky-500 font-bold text-white' : ''
+						}`}
 					>
 						{number}
 					</button>

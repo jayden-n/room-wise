@@ -13,10 +13,10 @@ router.get('/search', async (req: Request, res: Response) => {
 		let sortOptions = {};
 		switch (req.query.sortOption) {
 			case 'starRating':
-				sortOptions = { starRating: -1 }; // sort from high to low
+				sortOptions = { starRating: -1 }; // high to low
 				break;
 			case 'pricePerNightAsc':
-				sortOptions = { pricePerNight: 1 }; // sort from low to high
+				sortOptions = { pricePerNight: 1 }; // low to high
 				break;
 			case 'pricePerNightDesc':
 				sortOptions = { pricePerNight: -1 };

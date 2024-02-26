@@ -4,10 +4,12 @@ import * as apiClient from '../api-client';
 import { useState } from 'react';
 import SearchResultCard from '../components/SearchResultCard';
 import Pagination from '../components/Pagination';
+import StarRatingFilter from '../components/StarRatingFilter';
 
 const Search = () => {
 	const search = useSearchContext();
 	const [page, setPage] = useState<number>(1);
+	const [selectedStars, setSelectedStars] = useState<string[]>([]);
 
 	// convert all to type string before fetching
 	const searchParams = {
@@ -17,12 +19,24 @@ const Search = () => {
 		adultCount: search.adultCount.toString(),
 		childCount: search.childCount.toString(),
 		page: page.toString(),
+
+		stars: selectedStars,
 	};
 
 	const { data: hotelData, isLoading: isSearchHotelLoading } = useQuery(
 		['searchHotels', searchParams],
 		() => apiClient.searchHotels(searchParams),
 	);
+
+	const handleStarsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const starRating = event.target.value;
+
+		setSelectedStars((prevStars) =>
+			event.target.checked
+				? [...prevStars, starRating]
+				: prevStars.filter((star) => star !== starRating),
+		);
+	};
 
 	return (
 		<>
@@ -35,7 +49,12 @@ const Search = () => {
 							<h3 className="font-semibold text-lg border-b pb-5 border-zinc-300">
 								Filter by:
 							</h3>
-							{/* todo: filters */}
+							{/* todo: filters (checked) */}
+
+							<StarRatingFilter
+								selectedStars={selectedStars}
+								onChange={handleStarsChange}
+							/>
 						</div>
 					</div>
 					<div className="flex flex-col gap-5">
