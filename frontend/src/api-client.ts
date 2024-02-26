@@ -1,4 +1,4 @@
-import { HotelType } from '../../backend/src/shared/types';
+import { HotelSearchResponse, HotelType } from '../../backend/src/shared/types';
 import { LoginFormData } from './pages/Login';
 import { RegisterFormData } from './pages/Register';
 
@@ -131,6 +131,55 @@ export const deleteHotelById = async (hotelId: string) => {
 
 	if (!response.ok) {
 		throw new Error('Failed to update hotel');
+	}
+
+	return response.json();
+};
+
+export type SearchParams = {
+	destination?: string;
+	checkIn?: string;
+	checkOut?: string;
+	adultCount?: string;
+	childCount?: string;
+	page?: string;
+	facilities?: string[];
+	types?: string[];
+	stars?: string[];
+	maxPrice?: string;
+	sortOption?: string;
+};
+
+// GET method
+export const searchHotels = async (
+	searchParams: SearchParams,
+): Promise<HotelSearchResponse> => {
+	const queryParams = new URLSearchParams();
+
+	queryParams.append('destination', searchParams.destination || '');
+	queryParams.append('checkIn', searchParams.checkIn || '');
+	queryParams.append('checkOut', searchParams.checkOut || '');
+	queryParams.append('adultCount', searchParams.adultCount || '');
+	queryParams.append('childCount', searchParams.childCount || '');
+	queryParams.append('page', searchParams.page || '');
+
+	queryParams.append('maxPrice', searchParams.maxPrice || '');
+	queryParams.append('sortOption', searchParams.sortOption || '');
+
+	// user can choose multiple facilities []
+	searchParams.facilities?.forEach((facility) =>
+		queryParams.append('facilities', facility),
+	);
+
+	searchParams.types?.forEach((type) => queryParams.append('types', type));
+	searchParams.stars?.forEach((star) => queryParams.append('stars', star));
+
+	const response = await fetch(
+		`${API_BASE_URL}/api/hotels/search?${queryParams}`,
+	);
+
+	if (!response.ok) {
+		throw new Error('Error fetching hotel');
 	}
 
 	return response.json();

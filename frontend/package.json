@@ -11,6 +11,7 @@
 	},
 	"dependencies": {
 		"react": "^18.2.0",
+		"react-datepicker": "^6.1.0",
 		"react-dom": "^18.2.0",
 		"react-hook-form": "^7.50.0",
 		"react-icons": "^5.0.1",
@@ -19,6 +20,7 @@
 	},
 	"devDependencies": {
 		"@types/react": "^18.2.43",
+		"@types/react-datepicker": "^6.0.1",
 		"@types/react-dom": "^18.2.17",
 		"@typescript-eslint/eslint-plugin": "^6.14.0",
 		"@typescript-eslint/parser": "^6.14.0",

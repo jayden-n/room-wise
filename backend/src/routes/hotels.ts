@@ -1,35 +1,53 @@
 import express, { Request, Response } from 'express';
 import Hotel from '../models/hotel';
 import { HotelSearchResponse } from '../shared/types';
+import { constructSearchQuery } from '../utils/query';
 
 const router = express.Router();
 
 // /api/hotels/search?
 router.get('/search', async (req: Request, res: Response) => {
 	try {
-		const pageSize = 5;
+		const query = constructSearchQuery(req.query);
 
-		// page "request" has to be a number
+		let sortOptions = {};
+		switch (req.query.sortOption) {
+			case 'starRating':
+				sortOptions = { starRating: -1 }; // high to low
+				break;
+			case 'pricePerNightAsc':
+				sortOptions = { pricePerNight: 1 }; // low to high
+				break;
+			case 'pricePerNightDesc':
+				sortOptions = { pricePerNight: -1 };
+				break;
+		}
+
+		const pageSize = 5;
 		const pageNumber = parseInt(
 			req.query.page ? req.query.page.toString() : '1',
 		);
-
-		// pageNumber = 3
 		const skip = (pageNumber - 1) * pageSize;
-		const hotels = await Hotel.find().skip(skip).limit(pageSize);
-		const total = await Hotel.countDocuments();
+
+		const hotels = await Hotel.find(query)
+			.sort(sortOptions)
+			.skip(skip)
+			.limit(pageSize);
+
+		const total = await Hotel.countDocuments(query);
 
 		const response: HotelSearchResponse = {
 			data: hotels,
 			pagination: {
 				total,
 				page: pageNumber,
-				pages: Math.ceil(total / pageSize), // how many pages
+				pages: Math.ceil(total / pageSize),
 			},
 		};
-		res.status(200).json(response);
+
+		res.json(response);
 	} catch (error) {
-		console.log('Error searching for hotel: ', error);
+		console.log('error', error);
 		res.status(500).json({ message: 'Something went wrong' });
 	}
 });
