@@ -13,7 +13,7 @@ const HotelTypesFilter = ({ selectedHotelTypes, onChange }: Props) => {
 				<label className="flex items-center space-x-2 cursor-pointer text-zinc-500">
 					<input
 						type="checkbox"
-						className="rounded "
+						className="rounded"
 						value={hotel}
 						checked={selectedHotelTypes.includes(hotel)}
 						onChange={onChange}

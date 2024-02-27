@@ -18,6 +18,7 @@ const Search = () => {
 		string[]
 	>([]);
 	const [selectedPrice, setSelectedPrice] = useState<number | undefined>();
+	const [sortOption, setSortOption] = useState<string>('');
 
 	// convert all to type string before fetching
 	const searchParams = {
@@ -32,6 +33,7 @@ const Search = () => {
 		types: selectedHotelTypes,
 		facilities: selectedHotelFacilities,
 		maxPrice: selectedPrice?.toString(), // optional
+		sortOption,
 	};
 
 	const { data: hotelData, isLoading: isSearchHotelLoading } = useQuery(
@@ -91,7 +93,7 @@ const Search = () => {
 								Filter by:
 							</h3>
 
-							{/* todo: filters (checked) */}
+							{/* todo: filters - checked */}
 							<StarRatingFilter
 								selectedStars={selectedStars}
 								onChange={handleStarsChange}
@@ -119,7 +121,22 @@ const Search = () => {
 								{hotelData?.pagination.total} hotels found
 								{search.destination ? ` in ${search.destination}` : ''}
 							</span>
-							{/* toto: sort options */}
+
+							{/* toto: sort options - checked! */}
+							<select
+								value={sortOption}
+								onChange={(event) => setSortOption(event.target.value)}
+								className="p-2 border rounded-md"
+							>
+								<option value="">Sort By</option>
+								<option value="starRating">Star Rating</option>
+								<option value="pricePerNightAsc">
+									Price Per Night (low to high)
+								</option>
+								<option value="pricePerNightDesc">
+									Price Per Night (high to low)
+								</option>
+							</select>
 						</div>
 
 						{hotelData?.data.map((hotel) => (
