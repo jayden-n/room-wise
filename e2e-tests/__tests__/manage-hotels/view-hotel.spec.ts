@@ -24,12 +24,16 @@ test('should display hotels', async ({ page }) => {
 		page.getByRole('heading', { name: /Name: khach san 5 sao/i }),
 	).toBeVisible();
 
-	await expect(page.getByText(/Desc: 32das/i)).toBeVisible();
-	await expect(page.getByText(/York, Canada/i)).toBeVisible();
-	await expect(page.getByText(/Golf Resort/i)).toBeVisible();
-	await expect(page.getByText(/3 per night/i)).toBeVisible();
-	await expect(page.getByText(/2 stars/i)).toBeVisible();
-	await expect(page.getByText(/2 adults, 2 children/i)).toBeVisible();
+	await expect(
+		page.getByText(/Desc: This is hotel description/i).first(),
+	).toBeVisible();
+	await expect(
+		page.getByText(/Hotel city, Hotel country/i).first(),
+	).toBeVisible();
+	await expect(page.getByText(/Romantic/i).first()).toBeVisible();
+	await expect(page.getByText(/100 per night/i).first()).toBeVisible();
+	await expect(page.getByText(/3 stars/i).first()).toBeVisible();
+	await expect(page.getByText(/2 adults, 0 children/i).first()).toBeVisible();
 
 	// buttons
 	await expect(
