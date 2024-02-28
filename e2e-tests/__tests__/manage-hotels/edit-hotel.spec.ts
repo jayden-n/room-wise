@@ -31,16 +31,24 @@ test('should edit hotel', async ({ page }) => {
 	await expect(page.locator('[name="name"]')).toHaveValue(/khach san 5 sao/i);
 
 	// Fill the input with the updated value
-	await page.locator('[name="name"]').fill('khach san 5 sao. updated!');
+	await page.locator('[name="name"]').fill('khach san 5 sao UPDATED');
 	await page.getByRole('button', { name: /save/i }).click();
 	await expect(page.getByText(/hotel saved!/i)).toBeVisible();
 
 	await page.reload();
 
+	page
+		.getByRole('link', { name: /view details/i })
+		.first()
+		.click();
+	await expect(
+		page.getByRole('heading', { name: /edit hotel/i }),
+	).toBeVisible();
+
 	// looping to pass test every time
 	await expect(page.locator('[name="name"]')).toHaveValue(
-		/khach san 5 sao. updated!/i,
+		'khach san 5 sao UPDATED',
 	);
 	await page.locator('[name="name"]').fill('khach san 5 sao');
-	await page.getByRole('button', { name: /save/i }).click();
+	await page.getByRole('button', { name: 'Save' }).click();
 });
