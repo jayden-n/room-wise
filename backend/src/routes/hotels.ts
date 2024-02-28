@@ -2,8 +2,15 @@ import express, { Request, Response } from 'express';
 import Hotel from '../models/hotel';
 import { HotelSearchResponse } from '../shared/types';
 import { constructSearchQuery } from '../utils/query';
+import { param } from 'express-validator';
 
 const router = express.Router();
+
+router.get(
+	'/:id',
+	[param('id').notEmpty().withMessage('Hotel ID is required')],
+	async (req: Request, res: Response) => {},
+);
 
 // /api/hotels/search?
 router.get('/search', async (req: Request, res: Response) => {

@@ -3,6 +3,7 @@ import * as apiClient from '../api-client';
 import { useNavigate, useParams } from 'react-router-dom';
 import ManageHotelForm from '../forms/ManageHotelForm/ManageHotelForm';
 import { useAppContext } from '../contexts/AppContext';
+import { useEffect } from 'react';
 
 type Props = {
 	queryClient: QueryClient;
@@ -14,7 +15,7 @@ const EditHotel = ({ queryClient }: Props) => {
 	const { hotelId } = useParams();
 
 	const { data: singleHotelData } = useQuery(
-		'fetchMyHotelById',
+		['fetchMyHotelById', hotelId],
 		() => apiClient.fetchMyHotelById(hotelId || ''),
 		{
 			enabled: !!hotelId, // check if hotelId has an actual value
@@ -33,6 +34,12 @@ const EditHotel = ({ queryClient }: Props) => {
 			navigate('/my-hotels');
 		},
 	});
+
+	useEffect(() => {
+		if (hotelId) {
+			queryClient.invalidateQueries(['fetchMyHotelById', hotelId]);
+		}
+	}, [queryClient, hotelId]);
 
 	const handleSave = (updatedHotelFormData: FormData) => {
 		mutate(updatedHotelFormData);
