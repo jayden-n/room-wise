@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import * as apiClient from '../api-client';
 import { useEffect } from 'react';
 import { AiFillStar } from 'react-icons/ai';
+import GuestInfoForm from '../forms/GuestInfoForm/GuestInfoForm';
 
 type Props = {
 	queryClient: QueryClient;
@@ -59,9 +60,14 @@ const Detail = ({ queryClient }: Props) => {
 				))}
 			</div>
 
-			<div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr]">
+			<div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4">
 				<div className="whitespace-pre-line">{hotel.description}</div>
-				<div className="h-fit">guest</div>
+				<div className="h-fit">
+					<GuestInfoForm
+						hotelId={hotel._id}
+						pricePerNight={hotel.pricePerNight}
+					/>
+				</div>
 			</div>
 		</div>
 	);
