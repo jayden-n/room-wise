@@ -30,6 +30,14 @@ const SearchBar = () => {
 		navigate('/search');
 	};
 
+	const clearForm = () => {
+		setDestination('');
+		setCheckIn(new Date());
+		setCheckOut(new Date());
+		setAdultCount(1);
+		setChildCount(0);
+	};
+
 	const minDate = new Date();
 	const maxDate = new Date();
 	maxDate.setFullYear(maxDate.getFullYear() + 1); // can only book 1 year into the future
@@ -111,9 +119,13 @@ const SearchBar = () => {
 
 				<div className="flex gap-2 sm:col-span-2 lg:col-span-1">
 					<button className="bg-sky-400 text-white h-full w-2/3 p-2 font-bold hover:bg-sky-500 rounded">
-						Search
+						{destination.length > 0 ? 'Search' : 'View all hotels'}
 					</button>
-					<button className="bg-red-500 text-white h-full w-1/3 p-2 font-bold hover:bg-red-600 rounded">
+					<button
+						type="button"
+						onClick={clearForm}
+						className="bg-red-500 text-white h-full w-1/3 p-2 font-bold hover:bg-red-600 rounded"
+					>
 						Clear
 					</button>
 				</div>
