@@ -9,6 +9,7 @@ import EditHotel from './pages/EditHotel';
 import { useQueryClient } from 'react-query';
 import Search from './pages/Search';
 import Detail from './pages/Detail';
+import Booking from './pages/Booking';
 
 function App() {
 	const { isLoggedIn } = useAppContext();
@@ -54,6 +55,15 @@ function App() {
 				{/* only logged-in user can be able to add hotel */}
 				{isLoggedIn && (
 					<>
+						<Route
+							path="/hotel/:hotelId/booking"
+							element={
+								<Layout>
+									<Booking />
+								</Layout>
+							}
+						/>
+
 						<Route
 							path="/add-hotel"
 							element={
