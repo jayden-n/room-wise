@@ -32,7 +32,10 @@ const Detail = ({ queryClient }: Props) => {
 	return (
 		<div className="space-y-6">
 			<div>
-				<h1 className="text-3xl font-bold">{hotel.name}</h1>
+				<h1 className="text-3xl font-bold">
+					{hotel.name}{' '}
+					<span className="font-normal text-lg">in {hotel.city}</span>
+				</h1>
 				<span className="flex">
 					{Array.from({ length: hotel.starRating }).map(() => (
 						<AiFillStar className="fill-yellow-400" />

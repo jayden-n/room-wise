@@ -59,7 +59,7 @@ function App() {
 							path="/hotel/:hotelId/booking"
 							element={
 								<Layout>
-									<Booking />
+									<Booking queryClient={queryClient} />
 								</Layout>
 							}
 						/>
