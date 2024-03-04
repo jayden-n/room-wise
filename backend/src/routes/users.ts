@@ -13,7 +13,7 @@ router.get('/me', verifyToken, async (req: Request, res: Response) => {
 		const user = await User.findById(userId).select('-password'); // not including user password
 
 		if (!user) {
-			return res.status(400).json({ message: 'User not found' });
+			return res.status(404).json({ message: 'User not found' });
 		}
 
 		res.status(200).json(user);
