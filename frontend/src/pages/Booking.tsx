@@ -5,6 +5,8 @@ import { useSearchContext } from '../contexts/SearchContext';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import BookingDetailSummary from '../components/BookingDetailSummary';
+import { Elements } from '@stripe/react-stripe-js';
+import { useAppContext } from '../contexts/AppContext';
 
 type Props = {
 	queryClient: QueryClient;
@@ -14,6 +16,7 @@ const Booking = ({ queryClient }: Props) => {
 	const search = useSearchContext();
 	const { hotelId } = useParams();
 	const [numberOfNights, setNumberOfNights] = useState<number>(0);
+	const { stripePromise } = useAppContext();
 
 	useEffect(() => {
 		if (search.checkIn && search.checkOut) {
@@ -23,6 +26,18 @@ const Booking = ({ queryClient }: Props) => {
 			setNumberOfNights(Math.ceil(nights));
 		}
 	}, [search.checkIn, search.checkOut]);
+
+	// payment-intent (invoice)
+	const { data: paymentIntentData } = useQuery(
+		'createPaymentIntent',
+		() => {
+			return apiClient.createPaymentIntent(
+				hotelId as string,
+				numberOfNights.toString(),
+			);
+		},
+		{ enabled: !!hotelId && numberOfNights > 0 }, // only create invoice if there is hotelId and numberOfNights
+	);
 
 	const { data: hotel } = useQuery(
 		['fetchHotelById', hotelId], // send back id to memorize the latest hotel data
@@ -38,6 +53,7 @@ const Booking = ({ queryClient }: Props) => {
 		}
 	}, [queryClient, hotelId]);
 
+	// current user
 	const { data: currentUser } = useQuery(
 		'fetchCurrentUser',
 		apiClient.fetchCurrentUser,
@@ -57,7 +73,16 @@ const Booking = ({ queryClient }: Props) => {
 				numberOfNights={numberOfNights}
 				hotel={hotel}
 			/>
-			{currentUser && <BookingForm currentUser={currentUser} />}
+			{currentUser && paymentIntentData && (
+				<Elements
+					stripe={stripePromise}
+					options={{
+						clientSecret: paymentIntentData.clientSecret,
+					}}
+				>
+					<BookingForm currentUser={currentUser} />
+				</Elements>
+			)}
 		</div>
 	);
 };
