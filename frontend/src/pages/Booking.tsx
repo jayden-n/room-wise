@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { QueryClient, useQuery } from 'react-query';
 import * as apiClient from '../api-client';
 import BookingForm from '../forms/BookingForm/BookingForm';
@@ -20,9 +21,17 @@ const Booking = ({ queryClient }: Props) => {
 
 	useEffect(() => {
 		if (search.checkIn && search.checkOut) {
-			const nights =
-				Math.abs(search.checkOut.getTime() - search.checkIn.getTime()) / // milliseconds
-				(1000 * 60 * 60 * 24);
+			// Check if the checkIn and checkOut dates are the same day
+			const isSameDay =
+				search.checkIn.toDateString() === search.checkOut.toDateString();
+
+			// If it's the same day, consider it as a one-night stay
+			const nights = isSameDay
+				? 1
+				: Math.abs(search.checkOut.getTime() - search.checkIn.getTime()) /
+				  (1000 * 60 * 60 * 24);
+
+			// Update the state variable numberOfNights with the rounded-up value of nights
 			setNumberOfNights(Math.ceil(nights));
 		}
 	}, [search.checkIn, search.checkOut]);
@@ -80,7 +89,10 @@ const Booking = ({ queryClient }: Props) => {
 						clientSecret: paymentIntentData.clientSecret,
 					}}
 				>
-					<BookingForm currentUser={currentUser} />
+					<BookingForm
+						currentUser={currentUser}
+						paymentIntent={paymentIntentData}
+					/>
 				</Elements>
 			)}
 		</div>
