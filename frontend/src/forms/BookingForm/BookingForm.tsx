@@ -6,14 +6,15 @@ import {
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { StripeCardElement } from '@stripe/stripe-js';
 import { useSearchContext } from '../../contexts/SearchContext';
-import { useParams } from 'react-router-dom';
-import { useMutation } from 'react-query';
+import { useNavigate, useParams } from 'react-router-dom';
+import { QueryClient, useMutation } from 'react-query';
 import * as apiClient from '../../api-client';
 import { useAppContext } from '../../contexts/AppContext';
 
 type Props = {
 	currentUser: UserType;
 	paymentIntent: PaymentIntentResponse;
+	queryClient: QueryClient;
 };
 
 export type BookingFormData = {
@@ -29,18 +30,20 @@ export type BookingFormData = {
 	totalCost: number;
 };
 
-const BookingForm = ({ currentUser, paymentIntent }: Props) => {
+const BookingForm = ({ currentUser, paymentIntent, queryClient }: Props) => {
 	const stripe = useStripe();
 	const elements = useElements();
 	const search = useSearchContext();
 	const { hotelId } = useParams();
 	const { showToast } = useAppContext();
+	const navigate = useNavigate();
 
 	const { mutate: bookRoom, isLoading } = useMutation(
 		apiClient.createRoomBooking,
 		{
-			onSuccess: () => {
+			onSuccess: async () => {
 				showToast({ message: 'Booking Saved!', type: 'SUCCESS' });
+				await queryClient.invalidateQueries('fetchMyBookings'); // Manually trigger a re-fetch of 'fetchMyBookings' query
 			},
 			onError: () => {
 				showToast({ message: 'Error saving booking', type: 'ERROR' });
@@ -78,6 +81,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
 		if (result.paymentIntent?.status === 'succeeded') {
 			// book the room
 			bookRoom({ ...formData, paymentIntentId: result.paymentIntent.id });
+			navigate('/my-bookings');
 		}
 	};
 

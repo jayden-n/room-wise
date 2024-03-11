@@ -92,6 +92,7 @@ const Booking = ({ queryClient }: Props) => {
 					<BookingForm
 						currentUser={currentUser}
 						paymentIntent={paymentIntentData}
+						queryClient={queryClient}
 					/>
 				</Elements>
 			)}
