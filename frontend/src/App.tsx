@@ -24,7 +24,7 @@ function App() {
 					path="/"
 					element={
 						<Layout>
-							<Home />
+							<Home queryClient={queryClient} />
 						</Layout>
 					}
 				/>

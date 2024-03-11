@@ -1,0 +1,45 @@
+{
+	"_id": { "$oid": "65ef724af966d0b13b9a8cb6" },
+	"userId": "65c4fd8b8df4bf7a4d811b83",
+	"name": "Khach san 5 sao",
+	"city": "York",
+	"country": "Canada",
+	"description": "Amazing hotel with great service.",
+	"type": "Romantic",
+	"adultCount": { "$numberInt": "2" },
+	"childCount": { "$numberInt": "0" },
+	"facilities": ["Free WiFi", "Parking", "Outdoor Pool"],
+	"pricePerNight": { "$numberInt": "23" },
+	"starRating": { "$numberInt": "5" },
+	"imageUrls": [
+		"http://res.cloudinary.com/dnayd9kwa/image/upload/v1708439297/vxybqanlslm3kkuw0wnq.jpg"
+	],
+	"lastUpdated": { "$date": { "$numberLong": "1708439298781" } },
+	"__v": { "$numberInt": "1" },
+	"bookings": [
+		{
+			"firstName": "e2e_test_firstName",
+			"lastName": "e2e_test_lastName",
+			"email": "test@test.com",
+			"adultCount": { "$numberInt": "1" },
+			"childCount": { "$numberInt": "0" },
+			"checkIn": { "$date": { "$numberLong": "1710181780452" } },
+			"checkOut": { "$date": { "$numberLong": "1710354580000" } },
+			"userId": "6554f2ecd4f07417501dcbf1",
+			"totalCost": { "$numberInt": "46" },
+			"_id": { "$oid": "65ef4d97866192a3d1c9e2d2" }
+		},
+		{
+			"firstName": "e2e_test_firstName",
+			"lastName": "e2e_test_lastName",
+			"email": "test@test.com",
+			"adultCount": { "$numberInt": "1" },
+			"childCount": { "$numberInt": "0" },
+			"checkIn": { "$date": { "$numberLong": "1710187056683" } },
+			"checkOut": { "$date": { "$numberLong": "1710359856000" } },
+			"userId": "6554f2ecd4f07417501dcbf1",
+			"totalCost": { "$numberInt": "46" },
+			"_id": { "$oid": "65ef62345199e1396cbc4061" }
+		}
+	]
+}

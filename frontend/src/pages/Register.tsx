@@ -143,7 +143,7 @@ const Register = () => {
 				</span>
 				<button
 					type="submit"
-					className="bg-sky-500 text-white p-2 font-bold rounded hover:bg-sky-600 text-xl"
+					className="bg-sky-500 text-white py-2 px-4 font-bold rounded hover:bg-sky-600 text-xl"
 				>
 					Register
 				</button>
