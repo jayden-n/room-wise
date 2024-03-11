@@ -29,17 +29,17 @@ To ensure a stable testing environment, create a dedicated MongoDB database for 
 
 ### Importing Test Data into MongoDB:
 
-Utilize the provided JSON files in the `data` folder to import test user and hotel data into MongoDB:
+Utilize the provided JSON files in the `/e2e-tests/data` folder to import test user and hotel data into MongoDB:
 
 #### Test User Data:
 
-1. Locate the test user file (e.g., `test-users.json`) in the `data` folder.
+1. Locate the test user file (e.g., `test-user.json`) in the `data` folder.
 2. Open MongoDB Compass and connect to your database.
 3. Select the database used for automated tests (created in step 1).
 4. Import user data:
    - Navigate to the `users` collection (create it if necessary).
    - Click "Add Data" and choose "Import File."
-   - Select the `test-users.json` file, choose JSON as the format, and click "Import."
+   - Select the `test-user.json` file, choose JSON as the format, and click "Import."
    - The test user data will be added to the `users` collection.
    - Sample user login: `test@test.com/password123`
 
@@ -61,4 +61,3 @@ Follow these steps to execute end-to-end tests:
 4. Start the frontend and backend servers as outlined above.
 5. Refer to [Using the Playwright extension to run the tests](https://playwright.dev/docs/getting-started-vscode#running-tests) for guidance on executing tests using the Playwright extension.
 
-This setup ensures a robust testing environment, allowing for comprehensive end-to-end testing of your project.
