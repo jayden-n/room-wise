@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
-import { useAppContext } from '../contexts/AppContext';
-import LogoutButton from './LogoutButton';
+import { Link } from "react-router-dom";
+import { useAppContext } from "../contexts/AppContext";
+import LogoutButton from "./LogoutButton";
+import DrawOutlineButton from "./DrawOutlineButton";
 
 const Header = () => {
 	const { isLoggedIn } = useAppContext();
@@ -8,7 +9,7 @@ const Header = () => {
 	return (
 		<div className="bg-sky-500 py-6">
 			<div className="container mx-auto flex justify-between">
-				<span className="text-3xl font-bold tracking-tight text-white">
+				<span className="text-4xl font-hotel font-bold tracking-tight text-white">
 					<Link to="/">Room Wise</Link>
 				</span>
 
@@ -17,16 +18,16 @@ const Header = () => {
 					{isLoggedIn ? (
 						<>
 							<Link
-								className="flex items-center text-white px-3 py-2 font-bold hover:bg-sky-600 hover:rounded-md"
+								className="grid place-content-center bg-sky-500  "
 								to="/my-bookings"
 							>
-								My Bookings
+								<DrawOutlineButton>My Bookings</DrawOutlineButton>
 							</Link>
 							<Link
-								className="flex items-center text-white px-3 py-2 font-bold hover:bg-sky-600 hover:rounded-md"
+								className="grid place-content-center bg-sky-500 "
 								to="/my-hotels"
 							>
-								My Hotels
+								<DrawOutlineButton>My Hotels</DrawOutlineButton>
 							</Link>
 
 							{/* LOGOUT */}
@@ -35,7 +36,7 @@ const Header = () => {
 					) : (
 						<Link
 							to="/login"
-							className="flex cursor-pointer items-center rounded bg-white px-3 font-bold text-sky-600 hover:bg-gray-100"
+							className="flex cursor-pointer items-center rounded bg-white px-4 py-2 font-bold text-sky-600 hover:bg-gray-100"
 						>
 							Login
 						</Link>

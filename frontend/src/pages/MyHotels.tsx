@@ -1,12 +1,12 @@
-import { Link, useNavigate } from 'react-router-dom';
-import * as apiClient from '../api-client';
-import { QueryClient, useMutation, useQuery } from 'react-query';
-import { useAppContext } from '../contexts/AppContext';
-import { FaLocationDot } from 'react-icons/fa6';
-import { FaBuilding } from 'react-icons/fa';
-import { FaMoneyBill } from 'react-icons/fa';
-import { FaBed } from 'react-icons/fa';
-import { FaStar } from 'react-icons/fa';
+import { Link, useNavigate } from "react-router-dom";
+import * as apiClient from "../api-client";
+import { QueryClient, useMutation, useQuery } from "react-query";
+import { useAppContext } from "../contexts/AppContext";
+import { FaLocationDot } from "react-icons/fa6";
+import { FaBuilding } from "react-icons/fa";
+import { FaMoneyBill } from "react-icons/fa";
+import { FaBed } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 
 type Props = {
 	queryClient: QueryClient;
@@ -17,25 +17,25 @@ const MyHotels = ({ queryClient }: Props) => {
 	const { showToast } = useAppContext();
 
 	const { data: hotelData, isLoading: isHotelLoading } = useQuery(
-		'fetchMyHotels',
+		"fetchMyHotels",
 		apiClient.fetchMyHotels,
 		{
 			onError: () => {
-				showToast({ message: 'Error fetching hotels', type: 'ERROR' });
+				showToast({ message: "Error fetching hotels", type: "ERROR" });
 			},
 		},
 	);
 
 	const { mutate, isLoading } = useMutation(apiClient.deleteHotelById, {
 		onSuccess: () => {
-			showToast({ message: 'Hotel deleted!', type: 'SUCCESS' });
+			showToast({ message: "Hotel deleted!", type: "SUCCESS" });
 		},
 		onError: () => {
-			showToast({ message: 'Error deleting hotel', type: 'ERROR' });
+			showToast({ message: "Error deleting hotel", type: "ERROR" });
 		},
 		onSettled: () => {
-			queryClient.invalidateQueries(['fetchMyHotels']);
-			navigate('/my-hotels');
+			queryClient.invalidateQueries(["fetchMyHotels"]);
+			navigate("/my-hotels");
 		},
 	});
 
@@ -51,11 +51,11 @@ const MyHotels = ({ queryClient }: Props) => {
 				<div className="space-y-5">
 					<span className="flex justify-between items-center">
 						<h1 className="text-3xl font-bold">
-							{hotelData?.length === 0 ? 'No hotel found :(' : 'My hotels'}
+							{hotelData?.length === 0 ? "No hotel found :(" : "My hotels"}
 						</h1>
 						<Link
 							to="/add-hotel"
-							className="bg-sky-500 font-bold p-2 rounded-md text-xl text-white hover:bg-sky-400"
+							className="bg-sky-500 font-bold px-4 py-2 rounded-md text-xl text-white hover:bg-sky-400"
 						>
 							Add hotel
 						</Link>
@@ -87,7 +87,7 @@ const MyHotels = ({ queryClient }: Props) => {
 									</div>
 									<div className="border border-zinc-300 rounded-md  flex justify-center items-center gap-2 p-4">
 										<FaStar />
-										{hotel.starRating} star{hotel.starRating > 1 && 's'}
+										{hotel.starRating} star{hotel.starRating > 1 && "s"}
 									</div>
 									<div className="border border-zinc-300 rounded-md sm:col-span-2 flex justify-center items-center gap-2 p-4">
 										<FaBed />
