@@ -12,6 +12,7 @@
 	"dependencies": {
 		"@stripe/react-stripe-js": "^2.5.1",
 		"@stripe/stripe-js": "^3.0.7",
+		"framer-motion": "^11.0.12",
 		"react": "^18.2.0",
 		"react-datepicker": "^6.1.0",
 		"react-dom": "^18.2.0",
