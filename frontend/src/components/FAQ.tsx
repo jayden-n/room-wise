@@ -3,7 +3,7 @@ import Question from "./Question";
 const BasicFAQ = () => {
 	return (
 		<div className="px-4 py-12 border rounded-md">
-			<div className="mx-auto max-w-3xl">
+			<div className="mx-auto max-w-4xl">
 				<h3 className="mb-4 text-center text-3xl font-bold">
 					Frequently asked questions
 				</h3>
