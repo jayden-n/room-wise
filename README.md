@@ -1,3 +1,11 @@
+## Running Docker
+
+Build Docker images and run them as Docker containers
+
+```bash
+docker-compose -f docker-compose.yaml -p room-wise up -d
+```
+
 ## Cloning the Repository
 
 Start by cloning the repository to your local machine:
