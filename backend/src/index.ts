@@ -1,15 +1,15 @@
-import express, { Request, Response } from 'express';
-import cors from 'cors';
-import 'dotenv/config';
-import mongoose from 'mongoose'; // interact with db
-import userRoutes from './routes/users';
-import authRoutes from './routes/auth';
-import myHotelRoutes from './routes/my-hotels';
-import hotelRoutes from './routes/hotels';
-import bookingRoutes from './routes/my-bookings';
-import cookieParser from 'cookie-parser';
-import path from 'path';
-import { v2 as cloudinary } from 'cloudinary';
+import express, { Request, Response } from "express";
+import cors from "cors";
+import "dotenv/config";
+import mongoose from "mongoose"; // interact with db
+import userRoutes from "./routes/users";
+import authRoutes from "./routes/auth";
+import myHotelRoutes from "./routes/my-hotels";
+import hotelRoutes from "./routes/hotels";
+import bookingRoutes from "./routes/my-bookings";
+import cookieParser from "cookie-parser";
+import path from "path";
+import { v2 as cloudinary } from "cloudinary";
 
 // =============== cloudinary ===============
 cloudinary.config({
@@ -32,20 +32,20 @@ app.use(
 	}),
 ); // prevents certain requests from certain wrong URLs (blocked)
 
-app.use(express.static(path.join(__dirname, '../../frontend/dist')));
+app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
 // =============== ENDPOINTS ===============
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/hotels', hotelRoutes);
-app.use('/api/my-hotels', myHotelRoutes);
-app.use('/api/my-bookings', bookingRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/hotels", hotelRoutes);
+app.use("/api/my-hotels", myHotelRoutes);
+app.use("/api/my-bookings", bookingRoutes);
 
-app.get('*', (req: Request, res: Response) => {
-	res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
+app.get("*", (req: Request, res: Response) => {
+	res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
 });
 
 // =============== SERVER LISTENING ===============
 app.listen(8000, () => {
-	console.log('server running on 8000');
+	console.log("server running on 8000");
 });

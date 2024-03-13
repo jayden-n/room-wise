@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  frontend:
+    build: ./frontend
+    container_name: react-ui
+    ports:
+      - "5173:5173"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+    networks:
+      - room-wise
+
+  backend:
+    build: ./backend
+    container_name: rest-api
+    ports:
+      - "8000:8000"
+    restart: always
+    depends_on:
+      - database
+    networks:
+      - room-wise
+
+  database:
+    image: mongo:latest
+    container_name: mongo-db
+    ports:
+      - "27017:27017"
+    networks:
+      - room-wise
+
+networks:
+  room-wise:
+    driver: bridge
