@@ -1,10 +1,3 @@
-## Running Docker
-
-Build Docker images and run them as Docker containers
-
-```bash
-docker-compose -f docker-compose.yaml -p room-wise up -d
-```
 
 ## Cloning the Repository
 
@@ -15,6 +8,18 @@ git clone https://github.com/jayden-n/room-wise.git
 cd room-wise
 ```
 ---
+
+
+## Running Docker
+
+Build Docker images and run them as Docker containers
+
+```bash
+docker-compose -f docker-compose.yaml -p room-wise up -d
+```
+---
+
+
 ## Backend Configuration
 
 1. **Environment Files**: Navigate to the `backend` folder and create two files: `.env` and `.env.e2e`. Add the following contents to both files:
