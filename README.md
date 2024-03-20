@@ -1,5 +1,27 @@
+# Room Wise 
 
-## Cloning the Repository
+> [!NOTE]
+> A full-stack hotel booking web app utilizing Express.js on Node.js to architect a RESTful API server,
+facilitating data flow and integration between front-end React application and MongoDB back-end
+
+---
+
+## Table of Contents
+
+- [Cloning the repository](#cloning-the-repository)
+- [Running Docker](#running-docker)
+- [Back-end configuration](#back-end-configuration)
+- [Front-end configuration](#front-end-configuration)
+- [Running the application](#running-the-application)
+- [Running End-to-End test suite](#running-end-to-end-test-suite)
+- [Optimizations](#optimizations)
+- [Contributing](#contributing)
+
+
+
+---
+
+## Cloning the repository
 
 Start by cloning the repository to your local machine:
 
@@ -20,7 +42,7 @@ docker-compose -f docker-compose.yaml -p room-wise up -d
 ---
 
 
-## Backend Configuration
+## Back-end configuration
 
 1. **Environment Files**: Navigate to the `backend` folder and create two files: `.env` and `.env.e2e`. Add the following contents to both files:
 
@@ -62,7 +84,7 @@ docker-compose -f docker-compose.yaml -p room-wise up -d
     - The `FRONTEND_URL` should point to the URL where your frontend application is running (typically `http://localhost:5173` if you're running it locally).
   
 ---
-## Frontend Configuration
+## Front-end configuration
 
 1. **Environment Files**: Navigate to the `frontend` folder and create a file: `.env`:
 
@@ -94,7 +116,7 @@ docker-compose -f docker-compose.yaml -p room-wise up -d
 ---
 
 
-##  Running End-to-End Tests
+##  Running End-to-End test suite
 
 ### MongoDB Setup:
 
@@ -138,4 +160,63 @@ Follow these steps to execute end-to-end tests:
 3. Install dependencies: `npm install`.
 4. Start the frontend and backend servers as outlined above.
 5. Refer to [Using the Playwright extension to run the tests](https://playwright.dev/docs/getting-started-vscode#running-tests) for guidance on executing tests using the Playwright extension.
+
+## Contributing
+
+If you're interested in improving Room Wise, here's how you can get involved:
+
+### Getting Started
+
+1. `Fork the repository` to your own GitHub account.
+
+2. Clone the forked repository to your local machine:
+
+    ```sh
+    git clone https://github.com/your-username/room-wise.git
+    ```
+
+3. Create a new branch for your contributions:
+
+    ```sh
+    git checkout -b feature/your-feature-name
+    ```
+
+### Making Changes
+
+1. Implement your changes and improvements on the new branch.
+
+2. Test your changes thoroughly to ensure they work as expected.
+
+3. Commit your changes with meaningful commit messages:
+
+    ```sh
+    git commit -m "Add your detailed commit message here"
+    ```
+
+### Pushing Changes
+
+Once you're satisfied with your changes, push your branch to your forked repository:
+
+```sh
+git push origin feature/your-feature-name
+```
+### Opening a Pull Request
+
+1. Visit your forked repository on GitHub.
+
+2. Create a Pull Request (PR) from your feature branch to the original repository's `development` branch.
+
+3. Provide a detailed description of your changes in the PR.
+
+4. `Your PR will be reviewed`, and any necessary feedback will be provided.
+
+### Thank You!
+
+Thank you for contributing to Room Wise. Pull requests are welcomed and highly appreciated.
+
+If you have any questions or need assistance, feel free to open an issue and start a discussion.
+
+Happy Coding! 🚀
+
+**[Back to top](#table-of-contents)**
 
