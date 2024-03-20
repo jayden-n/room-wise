@@ -181,14 +181,14 @@ Follow these steps to execute end-to-end tests:
 
 - **Front-end:**
   
-    - [React](https://react.dev) 
-    - [TypeScript](https://www.typescriptlang.org) 
-    - [React Context API](https://react.dev/reference/react/useContext)
-    - [React-hook-form](https://react-hook-form.com)
-    - [React-router-dom](https://reactrouter.com/en/main)
-    - [TanStack Query (F.K.A React Query)](https://tanstack.com/query/latest)
-    - [Framer-motion](https://www.framer.com/motion)
-    - [TailwindCSS](https://tailwindcss.com)
+    - [React](https://react.dev) for building UI out of components
+    - [TypeScript](https://www.typescriptlang.org) for ensuring a self-documenting & type-safe codebase
+    - [React Context API](https://react.dev/reference/react/useContext) for handling app state management
+    - [React-hook-form](https://react-hook-form.com) for efficiently creating and managing forms data in React
+    - [React-router-dom](https://reactrouter.com/en/main) for managing client-side routing strategies
+    - [TanStack Query (F.K.A React Query)](https://tanstack.com/query/latest) for data feching, caching, synchronizing and updating server state
+    - [Framer-motion](https://www.framer.com/motion) for integrating interactive animations
+    - [TailwindCSS](https://tailwindcss.com) for responsive web design
 
 - **Back-end:**
   
@@ -202,7 +202,7 @@ Follow these steps to execute end-to-end tests:
 
 - **E2E Testing:**
 
-    - [Playwright](https://expressjs.com/)
+    - [Playwright](https://expressjs.com/) for achieving 99% test coverage through a comprehensive End-to-End test suite, accurately simulating diverse real-world scenarios based on end-user behavior
 
 
 **[Back to top](#table-of-contents)**
