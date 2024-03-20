@@ -9,12 +9,14 @@ facilitating data flow and integration between front-end React application and M
 ## Table of Contents
 
 - [Cloning the repository](#cloning-the-repository)
-- [Running Docker](#running-docker)
 - [Back-end configuration](#back-end-configuration)
 - [Front-end configuration](#front-end-configuration)
-- [Running the application](#running-the-application)
-- [Running End-to-End test suite](#running-end-to-end-test-suite)
-- [Optimizations](#optimizations)
+- [Start the application](#start-the-application)
+- [Running Docker](#running-docker) 🐳
+- [Running End-to-End test suite](#running-end-to-end-test-suite) 🧪
+- [Technologies](#technologies) 🧩
+- [Features (What problems can this application solve?)](#features-what-problems-can-this-application-solve) 🔍
+- [Optimizations](#optimizations) 📈
 - [Contributing](#contributing)
 
 
@@ -29,18 +31,10 @@ Start by cloning the repository to your local machine:
 git clone https://github.com/jayden-n/room-wise.git
 cd room-wise
 ```
+
+**[Back to top](#table-of-contents)**
+
 ---
-
-
-## Running Docker
-
-Build Docker images and run them as Docker containers
-
-```bash
-docker-compose -f docker-compose.yaml -p room-wise up -d
-```
----
-
 
 ## Back-end configuration
 
@@ -82,6 +76,10 @@ docker-compose -f docker-compose.yaml -p room-wise up -d
 
 7. **Frontend URL**:
     - The `FRONTEND_URL` should point to the URL where your frontend application is running (typically `http://localhost:5173` if you're running it locally).
+
+
+**[Back to top](#table-of-contents)**
+
   
 ---
 ## Front-end configuration
@@ -97,8 +95,10 @@ docker-compose -f docker-compose.yaml -p room-wise up -d
     - The `VITE_API_BASE_URL` should point to the URL where your backend application is running (typically `http://localhost:8000` if you're running it locally).
 
 
+**[Back to top](#table-of-contents)**
+
 ---
-## Running the Application
+## Start the application
 
 1. **Backend**:
     - Navigate to the `backend` directory
@@ -112,11 +112,23 @@ docker-compose -f docker-compose.yaml -p room-wise up -d
     - Start the frontend application: `npm run dev`
     - The application should now be running on `http://localhost:5173` but verify this in your command line terminal  
 
+**[Back to top](#table-of-contents)**
 
 ---
 
+## Running Docker 
 
-##  Running End-to-End test suite
+Build Docker images and run them as Docker containers
+
+```bash
+docker-compose -f docker-compose.yaml -p room-wise up -d
+```
+
+**[Back to top](#table-of-contents)**
+
+---
+
+##  Running End-to-End test suite 
 
 ### MongoDB Setup:
 
@@ -160,6 +172,83 @@ Follow these steps to execute end-to-end tests:
 3. Install dependencies: `npm install`.
 4. Start the frontend and backend servers as outlined above.
 5. Refer to [Using the Playwright extension to run the tests](https://playwright.dev/docs/getting-started-vscode#running-tests) for guidance on executing tests using the Playwright extension.
+
+
+**[Back to top](#table-of-contents)**
+
+---
+## Technologies 
+
+- **Front-end:**
+  
+    - [React](https://react.dev) 
+    - [TypeScript](https://www.typescriptlang.org) 
+    - [React Context API](https://react.dev/reference/react/useContext)
+    - [React-hook-form](https://react-hook-form.com)
+    - [React-router-dom](https://reactrouter.com/en/main)
+    - [TanStack Query (F.K.A React Query)](https://tanstack.com/query/latest)
+    - [Framer-motion](https://www.framer.com/motion)
+    - [TailwindCSS](https://tailwindcss.com)
+
+- **Back-end:**
+  
+    - [Express.js](https://expressjs.com/) & [Node.js](https://nodejs.org/en) for developing RESTful API endpoints, handling HTTP methods (CRUD operations) with layered validations
+    - [MongoDB](https://www.mongodb.com/) for Cloud Database (data storage)
+    - [Cloudinary](https://cloudinary.com/) for uploading & storing hotel images
+    - [Multer](https://www.npmjs.com/package/multer) for hotel images uploading & file validation
+    - [bcrypt.js](https://www.npmjs.com/package/bcrypt) for secure hashing of user passwords
+    - [JSON Web Token (JWT)](https://jwt.io/) for securely authenticating & authorizing user login/register through HTTP Cookies
+    - [Stripe](https://stripe.com/en-ca) for securely handling online booking transactions
+
+- **E2E Testing:**
+
+    - [Playwright](https://expressjs.com/)
+
+
+**[Back to top](#table-of-contents)**
+
+---
+
+## Features (What problems can this application solve?) 
+
+- `Fully-Functional Web App`: Developed using MERN Stack with TypeScript, facilitating seamless hotel room booking
+
+
+
+- `CRUD Operations`: Users can add, update, delete, and book rooms with ease
+  
+- `RESTful API`: Adhering to RESTful principles for designing API endpoints, ensuring interoperability, scalability, and ease of integration with external systems.
+
+- `Secure Transactions`: Integration with Stripe API ensures secure online booking transactions
+
+- `JWT Authentication`: Integrating JSON Web Tokens (JWT) for robust user authentication, enhancing security with stateless, token-based authorization
+
+- `Data Integrity`: Multi-layered validation system within API endpoints ensures the integrity of user data
+
+- `Persistent Booking Records`: User accounts store booking history for future reference
+
+- `Codebase Quality`: Achieved 100% test coverage through an extensive End-to-End test suite using Playwright
+
+- `Real-world Simulation`: Playwright accurately simulates diverse scenarios based on end-user behavior
+
+- `Containerization with Docker`: Dockerizing application components for streamlined deployment and scalability across diverse computing environments
+
+
+**[Back to top](#table-of-contents)**
+
+---
+
+## Optimizations:
+
+Future improvements will aim for optimization in:
+      
+- [ ] managing all hotel rooms through an ADMIN panel, which performs CRUD operations on hotel rooms for USERS' booking conveniences
+
+- [ ] controlling & limiting the rate of incoming requests from a set of IP addresses in order to protect the Server from potential brute-force attacks
+
+**[Back to top](#table-of-contents)**
+
+---
 
 ## Contributing
 
