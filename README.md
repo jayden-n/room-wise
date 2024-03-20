@@ -5,6 +5,12 @@
 facilitating data flow and integration between front-end React application and MongoDB back-end
 
 ---
+<img width="1726" alt="room-wise-showcase-2" src="https://github.com/jayden-n/room-wise/assets/94060508/77ffe24b-066f-41ee-9152-a4fbe193e31e">
+
+<img width="1727" alt="room-wise-showcase" src="https://github.com/jayden-n/room-wise/assets/94060508/92f55dcb-5be5-416c-b8ad-0af54423fb05">
+
+
+---
 
 ## Table of Contents
 
