@@ -214,10 +214,11 @@ Follow these steps to execute end-to-end tests:
 - `Fully-Functional Web App`: Developed using MERN Stack with TypeScript, facilitating seamless hotel room booking
 
 
-
 - `CRUD Operations`: Users can add, update, delete, and book rooms with ease
   
-- `RESTful API`: Adhering to RESTful principles for designing API endpoints, ensuring interoperability, scalability, and ease of integration with external systems.
+- `RESTful API`: Adhering to RESTful principles for designing API endpoints, ensuring interoperability, scalability, and ease of integration with external systems
+
+- `Filtering and Sorting Options`: Users can filter and sort hotels based on price and hotel types, enhancing their browsing experience and enabling them to find the perfect accommodation easily
 
 - `Secure Transactions`: Integration with Stripe API ensures secure online booking transactions
 
