@@ -22,6 +22,7 @@ facilitating data flow and integration between front-end React application and M
 - [Running End-to-End test suite](#running-end-to-end-test-suite) 🧪
 - [Technologies](#technologies) 🧩
 - [Features (What problems can this application solve?)](#features-what-problems-can-this-application-solve) 🔍
+- [Time taken](#time-taken) ⏳
 - [Optimizations](#optimizations) 📈
 - [Contributing](#contributing)
 
@@ -240,6 +241,16 @@ Follow these steps to execute end-to-end tests:
 
 - `Containerization with Docker`: Dockerizing application components for streamlined deployment and scalability across diverse computing environments
 
+
+**[Back to top](#table-of-contents)**
+
+
+---
+
+## Time taken
+
+> [!NOTE]
+> 2 months, and counting...
 
 **[Back to top](#table-of-contents)**
 
