@@ -8,6 +8,7 @@ facilitating data flow and integration between front-end React application and M
 <img width="1726" alt="room-wise-showcase-2" src="https://github.com/jayden-n/room-wise/assets/94060508/77ffe24b-066f-41ee-9152-a4fbe193e31e">
 
 <img width="1727" alt="room-wise-showcase" src="https://github.com/jayden-n/room-wise/assets/94060508/92f55dcb-5be5-416c-b8ad-0af54423fb05">
+<img width="1728" alt="Screenshot 2024-03-28 at 12 45 33 PM" src="https://github.com/jayden-n/room-wise/assets/94060508/cb43b267-74ab-4ea0-8ab9-6c356c127c51">
 
 
 ---
