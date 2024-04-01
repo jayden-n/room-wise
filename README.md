@@ -1,7 +1,7 @@
 # Room Wise 
 
 > [!NOTE]
-> A full-stack hotel booking web app utilizing Express.js on Node.js to architect a RESTful API server,
+> A full-stack hotel booking web app utilizing Express.js with TypeScript to architect a RESTful API server,
 facilitating data flow and integration between front-end React application and MongoDB back-end
 
 ---
